@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__AE_HANDLER__')) {
     define('__AE_HANDLER__', 1);
 }
@@ -32,24 +32,24 @@ class ae_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'Domain Name:' => 'domain.name',
-            'Registrar Name:' => 'domain.sponsor',
-            'Status:' => 'domain.status',
-            'Registrant Contact ID:' => 'owner.handle',
+        $items = [
+            'Domain Name:'             => 'domain.name',
+            'Registrar Name:'          => 'domain.sponsor',
+            'Status:'                  => 'domain.status',
+            'Registrant Contact ID:'   => 'owner.handle',
             'Registrant Contact Name:' => 'owner.name',
-            'Tech Contact Name:' => 'tech.name',
-            'Tech Contact ID:' => 'tech.handle',
-            'Name Server:' => 'domain.nserver.'
-        );
+            'Tech Contact Name:'       => 'tech.name',
+            'Tech Contact ID:'         => 'tech.handle',
+            'Name Server:'             => 'domain.nserver.',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.ae',
-            'registrar' => 'UAENIC'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.ae',
+            'registrar' => 'UAENIC',
+        ];
 
         return $r;
     }

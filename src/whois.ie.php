@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__IE_HANDLER__')) {
     define('__IE_HANDLER__', 1);
 }
@@ -32,16 +32,16 @@ class ie_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
+        $translate = [
             'nic-hdl' => 'handle',
-            'person' => 'name',
-            'renewal' => 'expires'
-        );
+            'person'  => 'name',
+            'renewal' => 'expires',
+        ];
 
-        $contacts = array(
+        $contacts = [
             'admin-c' => 'admin',
-            'tech-c' => 'tech',
-        );
+            'tech-c'  => 'tech',
+        ];
 
         $reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
@@ -50,12 +50,13 @@ class ie_handler
             unset($reg['domain']['descr']);
         }
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.domainregistry.ie',
-            'registrar' => 'IE Domain Registry'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.domainregistry.ie',
+            'registrar' => 'IE Domain Registry',
+        ];
+
         return $r;
     }
 }

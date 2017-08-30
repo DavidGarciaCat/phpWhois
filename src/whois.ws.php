@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__WS_HANDLER__')) {
     define('__WS_HANDLER__', 1);
 }
@@ -34,20 +34,20 @@ class ws_handler extends WhoisClient
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'Domain Name:' => 'domain.name',
-            'Registrant Name:' => 'owner.organization',
-            'Registrant Email:' => 'owner.email',
-            'Domain Created:' => 'domain.created',
-            'Domain Last Updated:' => 'domain.changed',
-            'Registrar Name:' => 'domain.sponsor',
-            'Current Nameservers:' => 'domain.nserver.',
-            'Administrative Contact Email:' => 'admin.email',
+        $items = [
+            'Domain Name:'                      => 'domain.name',
+            'Registrant Name:'                  => 'owner.organization',
+            'Registrant Email:'                 => 'owner.email',
+            'Domain Created:'                   => 'domain.created',
+            'Domain Last Updated:'              => 'domain.changed',
+            'Registrar Name:'                   => 'domain.sponsor',
+            'Current Nameservers:'              => 'domain.nserver.',
+            'Administrative Contact Email:'     => 'admin.email',
             'Administrative Contact Telephone:' => 'admin.phone',
-            'Registrar Whois:' => 'rwhois'
-        );
+            'Registrar Whois:'                  => 'rwhois',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
         $r['regyinfo']['referrer'] = 'http://www.samoanic.ws';

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__NU_HANDLER__')) {
     define('__NU_HANDLER__', 1);
 }
@@ -32,16 +32,16 @@ class nu_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'name' => 'Domain Name (UTF-8):',
+        $items = [
+            'name'    => 'Domain Name (UTF-8):',
             'created' => 'Record created on',
             'expires' => 'Record expires on',
             'changed' => 'Record last updated on',
-            'status' => 'Record status:',
-            'handle' => 'Record ID:'
-        );
+            'status'  => 'Record status:',
+            'handle'  => 'Record ID:',
+        ];
 
-        $r = array();
+        $r = [];
         while (list($key, $val) = each($data_str['rawdata'])) {
             $val = trim($val);
 
@@ -74,13 +74,14 @@ class nu_handler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array(
-            'whois' => 'whois.nic.nu',
-            'referrer' => 'http://www.nunames.nu',
-            'registrar' => '.NU Domain, Ltd'
-        );
+        $r['regyinfo'] = [
+            'whois'     => 'whois.nic.nu',
+            'referrer'  => 'http://www.nunames.nu',
+            'registrar' => '.NU Domain, Ltd',
+        ];
 
         format_dates($r, 'dmy');
+
         return $r;
     }
 }

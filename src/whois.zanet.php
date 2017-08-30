@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__ZANET_HANDLER__')) {
     define('__ZANET_HANDLER__', 1);
 }
@@ -32,21 +32,21 @@ class zanet_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'domain.name' => 'Domain Name            : ',
+        $items = [
+            'domain.name'    => 'Domain Name            : ',
             'domain.created' => 'Record Created         :',
             'domain.changed' => 'Record	Last Updated    :',
-            'owner.name' => 'Registered for         :',
-            'admin' => 'Administrative Contact :',
-            'tech' => 'Technical Contact      :',
+            'owner.name'     => 'Registered for         :',
+            'admin'          => 'Administrative Contact :',
+            'tech'           => 'Technical Contact      :',
             'domain.nserver' => 'Domain Name Servers listed in order:',
-            'registered' => 'No such domain: ',
-            '' => 'The ZA NiC whois'
-        );
+            'registered'     => 'No such domain: ',
+            ''               => 'The ZA NiC whois',
+        ];
 
         // Arrange contacts ...
 
-        $rawdata = array();
+        $rawdata = [];
 
         while (list($key, $line) = each($data_str['rawdata'])) {
             if (strpos($line, ' Contact ') !== false) {
@@ -61,7 +61,7 @@ class zanet_handler
             $rawdata[] = $line;
         }
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = get_blocks($rawdata, $items);
 
         if (isset($r['regrinfo']['registered'])) {
@@ -79,6 +79,7 @@ class zanet_handler
         $r['regyinfo']['referrer'] = 'http://www.za.net/'; // or http://www.za.org
         $r['regyinfo']['registrar'] = 'ZA NiC';
         format_dates($r, 'xmdxxy');
+
         return $r;
     }
 }

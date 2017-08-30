@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__RIPE_HANDLER__')) {
@@ -32,19 +32,19 @@ class ripe_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
+        $translate = [
+            'fax-no'  => 'fax',
+            'e-mail'  => 'email',
             'nic-hdl' => 'handle',
-            'person' => 'name',
+            'person'  => 'name',
             'netname' => 'name',
-            'descr' => 'desc'
-        );
+            'descr'   => 'desc',
+        ];
 
-        $contacts = array(
+        $contacts = [
             'admin-c' => 'admin',
-            'tech-c' => 'tech'
-        );
+            'tech-c'  => 'tech',
+        ];
 
         if (!empty($data_str['rawdata'])) {
             $data_str = $data_str['rawdata'];
@@ -81,9 +81,10 @@ class ripe_handler
             unset($r['admin']['admin-c']);
         }
 
-        $r = array('regrinfo' => $r);
+        $r = ['regrinfo' => $r];
         $r['regyinfo']['type'] = 'ip';
         $r['regyinfo']['registrar'] = 'RIPE Network Coordination Centre';
+
         return $r;
     }
 }

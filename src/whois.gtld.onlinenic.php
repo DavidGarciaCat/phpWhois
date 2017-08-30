@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__ONLINENIC_HANDLER__')) {
     define('__ONLINENIC_HANDLER__', 1);
 }
@@ -32,36 +32,36 @@ class onlinenic_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrator:',
-            'tech' => 'Technical Contactor:',
-            'billing' => 'Billing Contactor:',
-            'domain.name' => 'Domain name:',
-            'domain.name#' => 'Domain Name:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrator:',
+            'tech'           => 'Technical Contactor:',
+            'billing'        => 'Billing Contactor:',
+            'domain.name'    => 'Domain name:',
+            'domain.name#'   => 'Domain Name:',
             'domain.nserver' => 'Domain servers in listed order:',
             'domain.created' => 'Record created on ',
             'domain.expires' => 'Record expired on ',
-            'domain.changed' => 'Record last updated at '
-        );
+            'domain.changed' => 'Record last updated at ',
+        ];
 
-        $extra = array(
-            'tel--' => 'phone',
-            'tel:' => 'phone',
-            'tel --:' => 'phone',
-            'email-:' => 'email',
-            'email:' => 'email',
-            'mail:' => 'email',
-            'name--' => 'name',
-            'org:' => 'organization',
-            'zipcode:' => 'address.pcode',
-            'postcode:' => 'address.pcode',
-            'address:' => 'address.street',
-            'city:' => 'address.city',
-            'province:' => '',
+        $extra = [
+            'tel--'      => 'phone',
+            'tel:'       => 'phone',
+            'tel --:'    => 'phone',
+            'email-:'    => 'email',
+            'email:'     => 'email',
+            'mail:'      => 'email',
+            'name--'     => 'name',
+            'org:'       => 'organization',
+            'zipcode:'   => 'address.pcode',
+            'postcode:'  => 'address.pcode',
+            'address:'   => 'address.street',
+            'city:'      => 'address.city',
+            'province:'  => '',
             ',province:' => '',
-            ',country:' => 'address.country'
-        );
+            ',country:'  => 'address.country',
+        ];
 
         $r = easy_parser($data_str, $items, 'mdy', $extra, false, true);
 

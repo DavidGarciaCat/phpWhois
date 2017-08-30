@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__CA_HANDLER__')) {
     define('__CA_HANDLER__', 1);
 }
@@ -32,26 +32,26 @@ class ca_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative contact:',
-            'tech' => 'Technical contact:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrative contact:',
+            'tech'           => 'Technical contact:',
             'domain.sponsor' => 'Registrar:',
             'domain.nserver' => 'Name servers:',
-            'domain.status' => 'Domain status:',
+            'domain.status'  => 'Domain status:',
             'domain.created' => 'Creation date:',
             'domain.expires' => 'Expiry date:',
-            'domain.changed' => 'Updated date:'
-        );
+            'domain.changed' => 'Updated date:',
+        ];
 
-        $extra = array(
+        $extra = [
             'postal address:' => 'address.0',
-            'job title:' => '',
-            'number:' => 'handle',
-            'description:' => 'organization'
-        );
+            'job title:'      => '',
+            'number:'         => 'handle',
+            'description:'    => 'organization',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd', $extra);
 
         if (!empty($r['regrinfo']['domain']['sponsor'])) {
@@ -65,10 +65,11 @@ class ca_handler
             $r['regrinfo']['registered'] = 'yes';
         }
 
-        $r['regyinfo'] = array(
+        $r['regyinfo'] = [
             'registrar' => 'CIRA',
-            'referrer' => 'http://www.cira.ca/'
-        );
+            'referrer'  => 'http://www.cira.ca/',
+        ];
+
         return $r;
     }
 }

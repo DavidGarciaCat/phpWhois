@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__AFRINIC_HANDLER__')) {
@@ -32,22 +32,22 @@ class afrinic_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
-            'nic-hdl' => 'handle',
-            'person' => 'name',
-            'netname' => 'name',
+        $translate = [
+            'fax-no'       => 'fax',
+            'e-mail'       => 'email',
+            'nic-hdl'      => 'handle',
+            'person'       => 'name',
+            'netname'      => 'name',
             'organisation' => 'handle',
-            'org-name' => 'organization',
-            'org-type' => 'type'
-        );
+            'org-name'     => 'organization',
+            'org-type'     => 'type',
+        ];
 
-        $contacts = array(
+        $contacts = [
             'admin-c' => 'admin',
-            'tech-c' => 'tech',
-            'org' => 'owner'
-        );
+            'tech-c'  => 'tech',
+            'org'     => 'owner',
+        ];
 
         $r = generic_parser_a($data_str, $translate, $contacts, 'network', 'Ymd');
 
@@ -66,9 +66,10 @@ class afrinic_handler
             }
         }
 
-        $r = array('regrinfo' => $r);
+        $r = ['regrinfo' => $r];
         $r['regyinfo']['type'] = 'ip';
         $r['regyinfo']['registrar'] = 'African Network Information Center';
+
         return $r;
     }
 }

@@ -17,12 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
-
 if (!defined('__ARIN_HANDLER__')) {
     define('__ARIN_HANDLER__', 1);
 }
@@ -33,37 +32,37 @@ class arin_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'OrgName:' => 'owner.organization',
-            'CustName:' => 'owner.organization',
-            'OrgId:' => 'owner.handle',
-            'Address:' => 'owner.address.street.',
-            'City:' => 'owner.address.city',
-            'StateProv:' => 'owner.address.state',
-            'PostalCode:' => 'owner.address.pcode',
-            'Country:' => 'owner.address.country',
-            'NetRange:' => 'network.inetnum',
-            'NetName:' => 'network.name',
-            'NetHandle:' => 'network.handle',
-            'NetType:' => 'network.status',
-            'NameServer:' => 'network.nserver.',
-            'Comment:' => 'network.desc.',
-            'RegDate:' => 'network.created',
-            'Updated:' => 'network.changed',
-            'ASHandle:' => 'network.handle',
-            'ASName:' => 'network.name',
-            'NetHandle:' => 'network.handle',
-            'NetName:' => 'network.name',
-            'TechHandle:' => 'tech.handle',
-            'TechName:' => 'tech.name',
-            'TechPhone:' => 'tech.phone',
-            'TechEmail:' => 'tech.email',
-            'OrgAbuseName:' => 'abuse.name',
+        $items = [
+            'OrgName:'        => 'owner.organization',
+            'CustName:'       => 'owner.organization',
+            'OrgId:'          => 'owner.handle',
+            'Address:'        => 'owner.address.street.',
+            'City:'           => 'owner.address.city',
+            'StateProv:'      => 'owner.address.state',
+            'PostalCode:'     => 'owner.address.pcode',
+            'Country:'        => 'owner.address.country',
+            'NetRange:'       => 'network.inetnum',
+            'NetName:'        => 'network.name',
+            'NetHandle:'      => 'network.handle',
+            'NetType:'        => 'network.status',
+            'NameServer:'     => 'network.nserver.',
+            'Comment:'        => 'network.desc.',
+            'RegDate:'        => 'network.created',
+            'Updated:'        => 'network.changed',
+            'ASHandle:'       => 'network.handle',
+            'ASName:'         => 'network.name',
+            'NetHandle:'      => 'network.handle',
+            'NetName:'        => 'network.name',
+            'TechHandle:'     => 'tech.handle',
+            'TechName:'       => 'tech.name',
+            'TechPhone:'      => 'tech.phone',
+            'TechEmail:'      => 'tech.email',
+            'OrgAbuseName:'   => 'abuse.name',
             'OrgAbuseHandle:' => 'abuse.handle',
-            'OrgAbusePhone:' => 'abuse.phone',
-            'OrgAbuseEmail:' => 'abuse.email.',
-            'ReferralServer:' => 'rwhois'
-        );
+            'OrgAbusePhone:'  => 'abuse.phone',
+            'OrgAbuseEmail:'  => 'abuse.email.',
+            'ReferralServer:' => 'rwhois',
+        ];
 
         $r = generic_parser_b($data_str, $items, 'ymd', false, true);
 
@@ -71,6 +70,6 @@ class arin_handler
             $r['abuse']['email'] = implode(',', $r['abuse']['email']);
         }
 
-        return array('regrinfo' => $r);
+        return ['regrinfo' => $r];
     }
 }

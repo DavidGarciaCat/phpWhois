@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__FR_HANDLER__')) {
     define('__FR_HANDLER__', 1);
 }
@@ -32,30 +32,30 @@ class fr_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
-            'nic-hdl' => 'handle',
-            'ns-list' => 'handle',
-            'person' => 'name',
-            'address' => 'address.',
-            'descr' => 'desc',
+        $translate = [
+            'fax-no'      => 'fax',
+            'e-mail'      => 'email',
+            'nic-hdl'     => 'handle',
+            'ns-list'     => 'handle',
+            'person'      => 'name',
+            'address'     => 'address.',
+            'descr'       => 'desc',
             'anniversary' => '',
-            'domain' => '',
+            'domain'      => '',
             'last-update' => 'changed',
-            'registered' => 'created',
-            'country' => 'address.country',
-            'registrar' => 'sponsor',
-            'role' => 'organization'
-        );
+            'registered'  => 'created',
+            'country'     => 'address.country',
+            'registrar'   => 'sponsor',
+            'role'        => 'organization',
+        ];
 
-        $contacts = array(
-            'admin-c' => 'admin',
-            'tech-c' => 'tech',
-            'zone-c' => 'zone',
+        $contacts = [
+            'admin-c'  => 'admin',
+            'tech-c'   => 'tech',
+            'zone-c'   => 'zone',
             'holder-c' => 'owner',
-            'nsl-id' => 'nserver'
-        );
+            'nsl-id'   => 'nserver',
+        ];
 
         $reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'dmY');
 
@@ -64,12 +64,13 @@ class fr_handler
             unset($reg['nserver']);
         }
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.fr',
-            'registrar' => 'AFNIC'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.fr',
+            'registrar' => 'AFNIC',
+        ];
+
         return $r;
     }
 }

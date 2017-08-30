@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__DE_HANDLER__')) {
     define('__DE_HANDLER__', 1);
 }
@@ -32,43 +32,44 @@ class de_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'domain.name' => 'Domain:',
-            'domain.nserver.' => 'Nserver:',
+        $items = [
+            'domain.name'      => 'Domain:',
+            'domain.nserver.'  => 'Nserver:',
             'domain.nserver.#' => 'Nsentry:',
-            'domain.status' => 'Status:',
-            'domain.changed' => 'Changed:',
-            'domain.desc.' => 'Descr:',
-            'owner' => '[Holder]',
-            'admin' => '[Admin-C]',
-            'tech' => '[Tech-C]',
-            'zone' => '[Zone-C]'
-        );
+            'domain.status'    => 'Status:',
+            'domain.changed'   => 'Changed:',
+            'domain.desc.'     => 'Descr:',
+            'owner'            => '[Holder]',
+            'admin'            => '[Admin-C]',
+            'tech'             => '[Tech-C]',
+            'zone'             => '[Zone-C]',
+        ];
 
-        $extra = array(
-            'city:' => 'address.city',
-            'postalcode:' => 'address.pcode',
+        $extra = [
+            'city:'        => 'address.city',
+            'postalcode:'  => 'address.pcode',
             'countrycode:' => 'address.country',
-            'remarks:' => '',
-            'sip:' => 'sip',
-            'type:' => ''
-        );
+            'remarks:'     => '',
+            'sip:'         => 'sip',
+            'type:'        => '',
+        ];
 
-        $r = array();
+        $r = [];
 
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd', $extra);
 
-        $r['regyinfo'] = array(
+        $r['regyinfo'] = [
             'registrar' => 'DENIC eG',
-            'referrer' => 'http://www.denic.de/'
-        );
+            'referrer'  => 'http://www.denic.de/',
+        ];
 
-        if (!isset($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == "free") {
+        if (!isset($r['regrinfo']['domain']['status']) || $r['regrinfo']['domain']['status'] == 'free') {
             $r['regrinfo']['registered'] = 'no';
         } else {
             $r['regrinfo']['domain']['changed'] = substr($r['regrinfo']['domain']['changed'], 0, 10);
             $r['regrinfo']['registered'] = 'yes';
         }
+
         return $r;
     }
 }

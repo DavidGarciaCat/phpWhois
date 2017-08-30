@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__EDU_HANDLER__')) {
     define('__EDU_HANDLER__', 1);
 }
@@ -32,19 +32,19 @@ class edu_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'domain.name' => 'Domain name:',
+        $items = [
+            'domain.name'    => 'Domain name:',
             'domain.sponsor' => 'Registrar:',
             'domain.nserver' => 'Name Servers:',
             'domain.changed' => 'Domain record last updated:',
             'domain.created' => 'Domain record activated:',
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact:',
-            'tech' => 'Technical Contact:',
-            'billing' => 'Billing Contact:'
-        );
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrative Contact:',
+            'tech'           => 'Technical Contact:',
+            'billing'        => 'Billing Contact:',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'dmy');
 
         if (isset($b['tech'])) {
@@ -55,6 +55,7 @@ class edu_handler
 
         $r['regyinfo']['referrer'] = 'http://whois.educause.net';
         $r['regyinfo']['registrar'] = 'EDUCASE';
+
         return $r;
     }
 }

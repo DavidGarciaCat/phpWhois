@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__LACNIC_HANDLER__')) {
@@ -32,23 +32,23 @@ class lacnic_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
+        $translate = [
+            'fax-no'     => 'fax',
+            'e-mail'     => 'email',
             'nic-hdl-br' => 'handle',
-            'nic-hdl' => 'handle',
-            'person' => 'name',
-            'netname' => 'name',
-            'descr' => 'desc',
-            'country' => 'address.country'
-        );
+            'nic-hdl'    => 'handle',
+            'person'     => 'name',
+            'netname'    => 'name',
+            'descr'      => 'desc',
+            'country'    => 'address.country',
+        ];
 
-        $contacts = array(
+        $contacts = [
             'owner-c' => 'owner',
-            'tech-c' => 'tech',
+            'tech-c'  => 'tech',
             'abuse-c' => 'abuse',
-            'admin-c' => 'admin'
-        );
+            'admin-c' => 'admin',
+        ];
 
         $r = generic_parser_a($data_str, $translate, $contacts, 'network');
 
@@ -70,9 +70,10 @@ class lacnic_handler
             $r['network']['nserver'] = array_unique($r['network']['nserver']);
         }
 
-        $r = array('regrinfo' => $r);
+        $r = ['regrinfo' => $r];
         $r['regyinfo']['type'] = 'ip';
         $r['regyinfo']['registrar'] = 'Latin American and Caribbean IP address Regional Registry';
+
         return $r;
     }
 }

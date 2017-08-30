@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
@@ -25,27 +26,30 @@
 namespace phpWhois;
 
 /**
- * Additional utils
+ * Additional utils.
  */
 class Utils extends Whois
 {
     /**
-     * Wrap result in <pre></pre> tags
+     * Wrap result in <pre></pre> tags.
      *
      * @param  $obj
+     *
      * @return string
      */
     public function showObject(&$obj)
     {
         $r = $this->debugObject($obj);
+
         return "<pre>$r</pre>\n";
     }
 
     /**
-     * Return object or array as formatted string
+     * Return object or array as formatted string.
      *
      * @param  $obj
-     * @param  int $indent
+     * @param int $indent
+     *
      * @return string
      */
     public function debugObject($obj, $indent = 0)
@@ -55,12 +59,13 @@ class Utils extends Whois
             foreach ($obj as $k => $v) {
                 $return .= str_repeat('&nbsp;', $indent);
                 if (is_array($v)) {
-                    $return .= $k . "->Array\n";
+                    $return .= $k."->Array\n";
                     $return .= $this->debugObject($v, $indent + 1);
                 } else {
-                    $return .= $k . "->$v\n";
+                    $return .= $k."->$v\n";
                 }
             }
+
             return $return;
         }
     }
@@ -71,7 +76,7 @@ class Utils extends Whois
     }
 
     /**
-     * Get nice HTML output
+     * Get nice HTML output.
      */
     public function showHTML($result, $link_myself = true, $params = 'query=$0&amp;output=nice')
     {
@@ -98,7 +103,7 @@ class Utils extends Whois
                 $lempty = false;
             }
 
-            $out .= $line . "\n";
+            $out .= $line."\n";
         }
 
         if ($lempty) {
@@ -112,13 +117,13 @@ class Utils extends Whois
             function ($matches) {
                 if (substr($matches[0], 0, 4) == 'www.') {
                     $web = $matches[0];
-                    $url = 'http://' . $web;
+                    $url = 'http://'.$web;
                 } else {
                     $web = $matches[0];
                     $url = $web;
                 }
 
-                return '<a href="' . $url . '" target="_blank">' . $web . '</a>';
+                return '<a href="'.$url.'" target="_blank">'.$web.'</a>';
             },
             $out
         );
@@ -127,10 +132,10 @@ class Utils extends Whois
             if ($params[0] == '/') {
                 $link = $params;
             } else {
-                $link = $_SERVER['PHP_SELF'] . '?' . $params;
+                $link = $_SERVER['PHP_SELF'].'?'.$params;
             }
 
-            $out = preg_replace($ip_regex, '<a href="' . $link . '">$0</a>', $out);
+            $out = preg_replace($ip_regex, '<a href="'.$link.'">$0</a>', $out);
 
             if (isset($result['regrinfo']['domain']['nserver'])) {
                 $nserver = $result['regrinfo']['domain']['nserver'];
@@ -145,7 +150,7 @@ class Utils extends Whois
             if (is_array($nserver)) {
                 reset($nserver);
                 while (list($host, $ip) = each($nserver)) {
-                    $url = '<a href="' . str_replace('$0', $ip, $link) . "\">$host</a>";
+                    $url = '<a href="'.str_replace('$0', $ip, $link)."\">$host</a>";
                     $out = str_replace($host, $url, $out);
                     $out = str_replace(strtoupper($host), $url, $out);
                 }
@@ -156,7 +161,7 @@ class Utils extends Whois
         $out = preg_replace("/(?m)^([-\s\.&;'\w\t\(\)\/]+:\s*)/", '<b>$1</b>', $out);
 
         // Add italics for disclaimer
-        $out = preg_replace("/(?m)^(%.*)/", '<i>$0</i>', $out);
+        $out = preg_replace('/(?m)^(%.*)/', '<i>$0</i>', $out);
 
         return str_replace("\n", "<br/>\n", $out);
     }

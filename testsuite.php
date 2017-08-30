@@ -7,24 +7,24 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    require_once __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__.'/vendor/autoload.php')) {
+    require_once __DIR__.'/vendor/autoload.php';
 }
 
 use phpWhois\Whois;
@@ -32,18 +32,20 @@ use phpWhois\Whois;
 // Read domain list to test
 
 $lines = file('./test.txt');
-$domains = array();
+$domains = [];
 
 foreach ($lines as $line) {
     $pos = strpos($line, '/');
 
-    if ($pos !== false)
+    if ($pos !== false) {
         $line = substr($line, 0, $pos);
+    }
 
     $line = trim($line);
 
-    if ($line == '')
+    if ($line == '') {
         continue;
+    }
 
     $parts = explode(' ', str_replace("\t", ' ', $line));
     $key = $parts[0];
@@ -65,7 +67,7 @@ foreach ($lines as $line) {
 $fp = fopen('testsuite.txt', 'rt');
 
 if (!$fp) {
-    $results = array();
+    $results = [];
 } else {
     $results = unserialize(fgets($fp));
     fclose($fp);
@@ -74,7 +76,7 @@ if (!$fp) {
 // Specific test ?
 
 if (!empty($argv[1]) && isset($domains[$argv[1]])) {
-    $domains = array($domains[$argv[1]]);
+    $domains = [$domains[$argv[1]]];
 }
 
 // Test domains
@@ -129,43 +131,49 @@ save_results();
 
 //--------------------------------------------------------------------------
 
-function save_results() {
+function save_results()
+{
     global $results;
 
     $fp = fopen('testsuite.txt', 'wt');
-    fputs($fp, serialize($results));
+    fwrite($fp, serialize($results));
     fclose($fp);
 }
 
 //--------------------------------------------------------------------------
 
-function get_answer($question) {
+function get_answer($question)
+{
     echo "\n------ $question ? (y/n/a/c) ";
 
     while (true) {
         $res = trim(fgetc(STDIN));
 
-        if ($res == 'a')
+        if ($res == 'a') {
             exit();
+        }
 
         if ($res == 'c') {
             save_results();
             exit();
         }
-        if ($res == 'y')
+        if ($res == 'y') {
             return true;
-        if ($res == 'n')
+        }
+        if ($res == 'n') {
             return false;
+        }
     }
 }
 
 //--------------------------------------------------------------------------
 
-function array_diff_assoc_recursive($array1, $array2) {
+function array_diff_assoc_recursive($array1, $array2)
+{
     foreach ($array1 as $key => $value) {
         if (is_array($value)) {
             if (!is_array($array2[$key])) {
-                $difference[$key] = array('previous' => $array2[$key], 'actual' => $value);
+                $difference[$key] = ['previous' => $array2[$key], 'actual' => $value];
             } else {
                 $new_diff = array_diff_assoc_recursive($value, $array2[$key]);
 
@@ -175,7 +183,7 @@ function array_diff_assoc_recursive($array1, $array2) {
             }
         } else {
             if (!isset($array2[$key]) || $array2[$key] != $value) {
-                $difference[$key] = array('previous' => $array2[$key], 'actual' => $value);
+                $difference[$key] = ['previous' => $array2[$key], 'actual' => $value];
             }
         }
     }
@@ -184,7 +192,7 @@ function array_diff_assoc_recursive($array1, $array2) {
 
     foreach ($array2 as $key => $value) {
         if (!isset($array1[$key])) {
-            $difference[$key] = array('previous' => $value, 'actual' => '(missing)');
+            $difference[$key] = ['previous' => $value, 'actual' => '(missing)'];
         }
     }
 

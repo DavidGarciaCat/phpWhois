@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__BE_HANDLER__')) {
@@ -32,23 +32,23 @@ class be_handler
 {
     public function parse($data, $query)
     {
-        $items = array(
-            'domain.name' => 'Domain:',
-            'domain.status' => 'Status:',
+        $items = [
+            'domain.name'    => 'Domain:',
+            'domain.status'  => 'Status:',
             'domain.nserver' => 'Nameservers:',
             'domain.created' => 'Registered:',
-            'owner' => 'Licensee:',
-            'admin' => 'Onsite Contacts:',
-            'tech' => 'Registrar Technical Contacts:',
-            'agent' => 'Registrar:',
-            'agent.uri' => 'Website:'
-        );
+            'owner'          => 'Licensee:',
+            'admin'          => 'Onsite Contacts:',
+            'tech'           => 'Registrar Technical Contacts:',
+            'agent'          => 'Registrar:',
+            'agent.uri'      => 'Website:',
+        ];
 
-        $trans = array(
-            'company name2:' => ''
-        );
+        $trans = [
+            'company name2:' => '',
+        ];
 
-        $r = array();
+        $r = [];
 
         $r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
@@ -69,6 +69,7 @@ class be_handler
 
         $r['regyinfo']['referrer'] = 'http://www.domain-registry.nl';
         $r['regyinfo']['registrar'] = 'DNS Belgium';
+
         return $r;
     }
 }

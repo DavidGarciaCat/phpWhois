@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__PRO_HANDLER__')) {
@@ -32,10 +32,11 @@ class pro_handler
 {
     public function parse($data, $query)
     {
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data['rawdata']);
         $r['regyinfo']['referrer'] = 'http://www.registrypro.pro';
         $r['regyinfo']['registrar'] = 'RegistryPRO';
+
         return $r;
     }
 }

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__ASCIO_HANDLER__')) {
     define('__ASCIO_HANDLER__', 1);
 }
@@ -32,17 +32,17 @@ class ascio_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative ',
-            'tech' => 'Technical ',
-            'domain.name' => 'Domain name:',
+        $items = [
+            'owner'           => 'Registrant:',
+            'admin'           => 'Administrative ',
+            'tech'            => 'Technical ',
+            'domain.name'     => 'Domain name:',
             'domain.nserver.' => 'Domain servers in listed order:',
-            'domain.created' => 'Record created:',
-            'domain.expires' => 'Record expires:',
-            'domain.changed' => 'Record last updated:'
-        );
+            'domain.created'  => 'Record created:',
+            'domain.expires'  => 'Record expires:',
+            'domain.changed'  => 'Record last updated:',
+        ];
 
-        return easy_parser($data_str, $items, 'ymd', array(), false, true);
+        return easy_parser($data_str, $items, 'ymd', [], false, true);
     }
 }

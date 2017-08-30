@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__RO_HANDLER__')) {
     define('__RO_HANDLER__', 1);
 }
@@ -38,29 +38,29 @@ class ro_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
-            'nic-hdl' => 'handle',
-            'person' => 'name',
-            'address' => 'address.',
-            'domain-name' => '',
-            'updated' => 'changed',
+        $translate = [
+            'fax-no'            => 'fax',
+            'e-mail'            => 'email',
+            'nic-hdl'           => 'handle',
+            'person'            => 'name',
+            'address'           => 'address.',
+            'domain-name'       => '',
+            'updated'           => 'changed',
             'registration-date' => 'created',
-            'domain-status' => 'status',
-            'nameserver' => 'nserver'
-        );
+            'domain-status'     => 'status',
+            'nameserver'        => 'nserver',
+        ];
 
-        $contacts = array(
-            'admin-contact' => 'admin',
+        $contacts = [
+            'admin-contact'     => 'admin',
             'technical-contact' => 'tech',
-            'zone-contact' => 'zone',
-            'billing-contact' => 'billing'
-        );
+            'zone-contact'      => 'zone',
+            'billing-contact'   => 'billing',
+        ];
 
-        $extra = array(
-            'postal code:' => 'address.pcode'
-        );
+        $extra = [
+            'postal code:' => 'address.pcode',
+        ];
 
         $reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
@@ -81,12 +81,12 @@ class ro_handler
             $reg['registered'] = 'no';
         }
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.ro',
-            'registrar' => 'nic.ro'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.ro',
+            'registrar' => 'nic.ro',
+        ];
 
         return $r;
     }

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__INT_HANDLER__')) {
     define('__INT_HANDLER__', 1);
 }
@@ -33,10 +33,11 @@ class int_handler
     public function parse($data_str, $query)
     {
         $iana = new iana_handler();
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $iana->parse($data_str['rawdata'], $query);
         $r['regyinfo']['referrer'] = 'http://www.iana.org/int-dom/int.htm';
         $r['regyinfo']['registrar'] = 'Internet Assigned Numbers Authority';
+
         return $r;
     }
 }

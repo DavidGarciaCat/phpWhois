@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__BR_HANDLER__')) {
@@ -32,27 +32,28 @@ class br_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
+        $translate = [
+            'fax-no'     => 'fax',
+            'e-mail'     => 'email',
             'nic-hdl-br' => 'handle',
-            'person' => 'name',
-            'netname' => 'name',
-            'domain' => 'name',
-            'updated' => ''
-        );
+            'person'     => 'name',
+            'netname'    => 'name',
+            'domain'     => 'name',
+            'updated'    => '',
+        ];
 
-        $contacts = array(
-            'owner-c' => 'owner',
-            'tech-c' => 'tech',
-            'admin-c' => 'admin',
-            'billing-c' => 'billing'
-        );
+        $contacts = [
+            'owner-c'   => 'owner',
+            'tech-c'    => 'tech',
+            'admin-c'   => 'admin',
+            'billing-c' => 'billing',
+        ];
 
         $r = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
         if (in_array('Permission denied.', $r['disclaimer'])) {
             $r['registered'] = 'unknown';
+
             return $r;
         }
 
@@ -78,12 +79,13 @@ class br_handler
             unset($r['domain']['phone']);
         }
 
-        $a = array();
+        $a = [];
         $a['regrinfo'] = $r;
-        $a['regyinfo'] = array(
+        $a['regyinfo'] = [
             'registrar' => 'BR-NIC',
-            'referrer' => 'http://www.nic.br'
-        );
+            'referrer'  => 'http://www.nic.br',
+        ];
+
         return $a;
     }
 }

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__LY_HANDLER__')) {
@@ -32,21 +32,21 @@ class ly_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact:',
-            'tech' => 'Technical Contact:',
-            'domain.name' => 'Domain Name:',
-            'domain.status' => 'Domain Status:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrative Contact:',
+            'tech'           => 'Technical Contact:',
+            'domain.name'    => 'Domain Name:',
+            'domain.status'  => 'Domain Status:',
             'domain.created' => 'Created:',
             'domain.changed' => 'Updated:',
             'domain.expires' => 'Expired:',
-            'domain.nserver' => 'Domain servers in listed order:'
-        );
+            'domain.nserver' => 'Domain servers in listed order:',
+        ];
 
-        $extra = array('zip/postal code:' => 'address.pcode');
+        $extra = ['zip/postal code:' => 'address.pcode'];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
         if (!empty($r['regrinfo']['domain']['name'])) {
@@ -54,14 +54,15 @@ class ly_handler
             $r['regrinfo']['domain']['name'] = $r['regrinfo']['domain']['name'][0];
             $r['regrinfo']['registered'] = 'yes';
         } else {
-            $r = array('regrinfo' => array());
+            $r = ['regrinfo' => []];
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.ly',
-            'registrar' => 'Libya ccTLD'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.ly',
+            'registrar' => 'Libya ccTLD',
+        ];
+
         return $r;
     }
 }

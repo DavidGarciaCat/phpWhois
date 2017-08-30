@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__IP_HANDLER__')) {
     define('__IP_HANDLER__', 1);
 }
@@ -30,37 +30,36 @@ use phpWhois\WhoisClient;
 
 class ip_handler extends WhoisClient
 {
-
     /**
-     * @var Deep whois? 
+     * @var Deep whois?
      */
     public $deepWhois = true;
-    public $REGISTRARS = array(
-        'European Regional Internet Registry/RIPE NCC' => 'whois.ripe.net',
-        'RIPE Network Coordination Centre' => 'whois.ripe.net',
-        'Asia Pacific Network Information	Center' => 'whois.apnic.net',
-        'Asia Pacific Network Information Centre' => 'whois.apnic.net',
+    public $REGISTRARS = [
+        'European Regional Internet Registry/RIPE NCC'              => 'whois.ripe.net',
+        'RIPE Network Coordination Centre'                          => 'whois.ripe.net',
+        'Asia Pacific Network Information	Center'                   => 'whois.apnic.net',
+        'Asia Pacific Network Information Centre'                   => 'whois.apnic.net',
         'Latin American and Caribbean IP address Regional Registry' => 'whois.lacnic.net',
-        'African Network Information Center' => 'whois.afrinic.net'
-    );
-    public $HANDLERS = array(
-        'whois.krnic.net' => 'krnic',
-        'whois.apnic.net' => 'apnic',
-        'whois.ripe.net' => 'ripe',
-        'whois.arin.net' => 'arin',
-        'whois.lacnic.net' => 'lacnic',
-        'whois.afrinic.net' => 'afrinic'
-    );
-    public $more_data = array(); // More queries to get more accurated data
-    public $done = array();
+        'African Network Information Center'                        => 'whois.afrinic.net',
+    ];
+    public $HANDLERS = [
+        'whois.krnic.net'   => 'krnic',
+        'whois.apnic.net'   => 'apnic',
+        'whois.ripe.net'    => 'ripe',
+        'whois.arin.net'    => 'arin',
+        'whois.lacnic.net'  => 'lacnic',
+        'whois.afrinic.net' => 'afrinic',
+    ];
+    public $more_data = []; // More queries to get more accurated data
+    public $done = [];
 
     public function parse($data, $query)
     {
-        $result = array(
-            'regrinfo' => array(),
-            'regyinfo' => array(),
-            'rawdata' => array(),
-        );
+        $result = [
+            'regrinfo' => [],
+            'regyinfo' => [],
+            'rawdata'  => [],
+        ];
         $result['regyinfo']['registrar'] = 'American Registry for Internet Numbers (ARIN)';
 
         if (strpos($query, '.') === false) {
@@ -70,10 +69,10 @@ class ip_handler extends WhoisClient
         }
 
         if (!$this->deepWhois) {
-            return null;
+            return;
         }
 
-        $this->query = array();
+        $this->query = [];
         $this->query['server'] = 'whois.arin.net';
         $this->query['query'] = $query;
 
@@ -83,10 +82,10 @@ class ip_handler extends WhoisClient
             return $result;
         }
 
-        $presults = array();
+        $presults = [];
         $presults[] = $rawdata;
         $ip = ip2long($query);
-        $done = array();
+        $done = [];
 
         while (count($presults) > 0) {
             $rwdata = array_shift($presults);
@@ -114,7 +113,7 @@ class ip_handler extends WhoisClient
                             $this->handle_rwhois($this->REGISTRARS['owner'], $query);
                             break 2;
                         } else {
-                            $this->query['args'] = 'n ' . $net;
+                            $this->query['args'] = 'n '.$net;
                             $presults[] = $this->getRawData($net);
                             $done[$net] = 1;
                         }
@@ -146,7 +145,7 @@ class ip_handler extends WhoisClient
                     if (!empty($srv_data['file'])) {
                         $this->query['file'] = $srv_data['file'];
                     } else {
-                        $this->query['file'] = 'whois.' . $this->query['handler'] . '.php';
+                        $this->query['file'] = 'whois.'.$this->query['handler'].'.php';
                     }
                 }
 
@@ -155,7 +154,6 @@ class ip_handler extends WhoisClient
                 $reset = false;
             }
         }
-
 
         // Normalize nameserver fields
 
@@ -238,10 +236,10 @@ class ip_handler extends WhoisClient
             return;
         }
 
-        $q = array(
-            'query' => $query,
-            'server' => $server
-        );
+        $q = [
+            'query'  => $query,
+            'server' => $server,
+        ];
 
         if (isset($this->HANDLERS[$host])) {
             $q['handler'] = $this->HANDLERS[$host];
@@ -263,10 +261,11 @@ class ip_handler extends WhoisClient
     {
         if (isset($result['regrinfo'][$key]) && !array_key_exists(0, $result['regrinfo'][$key])) {
             $r = $result['regrinfo'][$key];
-            $result['regrinfo'][$key] = array($r);
+            $result['regrinfo'][$key] = [$r];
         }
 
         $result['regrinfo'][$key][] = $newres['regrinfo'][$key];
+
         return $result;
     }
 }

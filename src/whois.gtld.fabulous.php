@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__FABULOUS_HANDLER__')) {
     define('__FABULOUS_HANDLER__', 1);
 }
@@ -32,15 +32,15 @@ class fabulous_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Domain ' . $query . ':',
-            'admin' => 'Administrative contact:',
-            'tech' => 'Technical contact:',
+        $items = [
+            'owner'   => 'Domain '.$query.':',
+            'admin'   => 'Administrative contact:',
+            'tech'    => 'Technical contact:',
             'billing' => 'Billing contact:',
-            '' => 'Record dates:'
-        );
+            ''        => 'Record dates:',
+        ];
 
-        $r = easy_parser($data_str, $items, 'mdy', array(), false, true);
+        $r = easy_parser($data_str, $items, 'mdy', [], false, true);
 
         if (!isset($r['tech'])) {
             $r['tech'] = $r['billing'];

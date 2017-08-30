@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__DOMAINPEOPLE_HANDLER__')) {
     define('__DOMAINPEOPLE_HANDLER__', 1);
 }
@@ -32,24 +32,25 @@ class domainpeople_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant Contact:',
-            'admin' => 'Administrative Contact:',
-            'tech' => 'Technical Contact:',
-            'domain.name' => 'Domain name:',
-            'domain.sponsor' => 'Registration Service Provided By:',
+        $items = [
+            'owner'           => 'Registrant Contact:',
+            'admin'           => 'Administrative Contact:',
+            'tech'            => 'Technical Contact:',
+            'domain.name'     => 'Domain name:',
+            'domain.sponsor'  => 'Registration Service Provided By:',
             'domain.referrer' => 'Contact:',
             'domain.nserver.' => 'Name Servers:',
-            'domain.created' => 'Creation date:',
-            'domain.expires' => 'Expiration date:',
+            'domain.created'  => 'Creation date:',
+            'domain.expires'  => 'Expiration date:',
         //            'domain.changed' => 'Record last updated on',
-            'domain.status' => 'Status:'
-        );
+            'domain.status' => 'Status:',
+        ];
 
-        $r = easy_parser($data_str, $items, 'dmy', array(), false, true);
+        $r = easy_parser($data_str, $items, 'dmy', [], false, true);
         if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor'])) {
             $r['domain']['sponsor'] = $r['domain']['sponsor'][0];
         }
+
         return $r;
     }
 }

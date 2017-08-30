@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__MOBI_HANDLER__')) {
     define('__MOBI_HANDLER__', 1);
 }
@@ -32,7 +32,7 @@ class mobi_handler
 {
     public function parse($data_str, $query)
     {
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata']);
 
         if (!strncmp($data_str['rawdata'][0], 'WHOIS LIMIT EXCEEDED', 20)) {
@@ -41,6 +41,7 @@ class mobi_handler
 
         $r['regyinfo']['referrer'] = 'http://www.mtld.mobi/';
         $r['regyinfo']['registrar'] = 'Dot Mobi Registry';
+
         return $r;
     }
 }

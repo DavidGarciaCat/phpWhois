@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
@@ -37,29 +38,30 @@ class ir_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
+        $translate = [
             'nic-hdl' => 'handle',
-            'org' => 'organization',
-            'e-mail' => 'email',
-            'person' => 'name',
-            'fax-no' => 'fax',
-            'domain' => 'name'
-        );
+            'org'     => 'organization',
+            'e-mail'  => 'email',
+            'person'  => 'name',
+            'fax-no'  => 'fax',
+            'domain'  => 'name',
+        ];
 
-        $contacts = array(
-            'admin-c' => 'admin',
-            'tech-c' => 'tech',
-            'holder-c' => 'owner'
-        );
+        $contacts = [
+            'admin-c'  => 'admin',
+            'tech-c'   => 'tech',
+            'holder-c' => 'owner',
+        ];
 
         $reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'http://whois.nic.ir/',
-            'registrar' => 'NIC-IR'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://whois.nic.ir/',
+            'registrar' => 'NIC-IR',
+        ];
+
         return $r;
     }
 }
