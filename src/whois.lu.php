@@ -26,7 +26,7 @@ if (!defined('__LU_HANDLER__')) {
     define('__LU_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class lu_handler
 {

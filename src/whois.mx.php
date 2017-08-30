@@ -26,7 +26,7 @@ if (!defined('__MX_HANDLER__')) {
     define('__MX_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class mx_handler
 {

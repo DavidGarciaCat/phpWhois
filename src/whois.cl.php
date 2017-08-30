@@ -26,7 +26,7 @@ if (!defined('__CL_HANDLER__')) {
     define('__CL_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class cl_handler
 {

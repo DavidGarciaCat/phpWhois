@@ -26,7 +26,7 @@ if (!defined('__AT_HANDLER__')) {
     define('__AT_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class at_handler
 {

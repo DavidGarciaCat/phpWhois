@@ -26,7 +26,7 @@ if (!defined('__ZANET_HANDLER__')) {
     define('__ZANET_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class zanet_handler
 {

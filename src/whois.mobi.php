@@ -26,7 +26,7 @@ if (!defined('__MOBI_HANDLER__')) {
     define('__MOBI_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class mobi_handler
 {

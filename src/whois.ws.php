@@ -28,7 +28,7 @@ if (!defined('__WS_HANDLER__')) {
 
 use phpWhois\WhoisClient;
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class ws_handler extends WhoisClient
 {

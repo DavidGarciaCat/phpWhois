@@ -26,7 +26,7 @@ if (!defined('__NAMEJUICE_HANDLER__')) {
     define('__NAMEJUICE_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class namejuice_handler
 {

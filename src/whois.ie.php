@@ -26,7 +26,7 @@ if (!defined('__IE_HANDLER__')) {
     define('__IE_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class ie_handler
 {

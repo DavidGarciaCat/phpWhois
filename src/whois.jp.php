@@ -28,7 +28,7 @@ if (!defined('__JP_HANDLER__')) {
 
 use phpWhois\WhoisClient;
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class jp_handler extends WhoisClient
 {
@@ -89,8 +89,9 @@ class jp_handler extends WhoisClient
         }
 
         if (!empty($r['regrinfo']['tech']['handle'])) {
-            if (!empty($r['regrinfo']['admin']['handle']) &&
-                    $r['regrinfo']['admin']['handle'] == $r['regrinfo']['tech']['handle']) {
+            if (!empty($r['regrinfo']['admin']['handle']) 
+                && $r['regrinfo']['admin']['handle'] == $r['regrinfo']['tech']['handle']
+            ) {
                 $r['regrinfo']['tech'] = $r['regrinfo']['admin'];
             } else {
                 unset($this->query);

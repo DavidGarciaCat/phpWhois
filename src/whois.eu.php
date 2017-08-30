@@ -22,7 +22,7 @@
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 if (!defined('__EU_HANDLER__')) {
     define('__EU_HANDLER__', 1);
@@ -53,17 +53,17 @@ class eu_handler
 
         if (!empty($r['regrinfo']['domain']['status'])) {
             switch ($r['regrinfo']['domain']['status']) {
-                case 'FREE':
-                case 'AVAILABLE':
-                    $r['regrinfo']['registered'] = 'no';
-                    break;
+            case 'FREE':
+            case 'AVAILABLE':
+                $r['regrinfo']['registered'] = 'no';
+                break;
 
-                case 'APPLICATION PENDING':
-                    $r['regrinfo']['registered'] = 'pending';
-                    break;
+            case 'APPLICATION PENDING':
+                $r['regrinfo']['registered'] = 'pending';
+                break;
 
-                default:
-                    $r['regrinfo']['registered'] = 'unknown';
+            default:
+                $r['regrinfo']['registered'] = 'unknown';
             }
         } else {
             $r['regrinfo']['registered'] = 'yes';

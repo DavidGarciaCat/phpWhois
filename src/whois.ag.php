@@ -26,7 +26,7 @@ if (!defined('__AG_HANDLER__')) {
     define('__AG_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class ag_handler
 {

@@ -28,7 +28,7 @@ if (!defined('__GTLD_HANDLER__')) {
 
 use phpWhois\WhoisClient;
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class gtld_handler extends WhoisClient
 {

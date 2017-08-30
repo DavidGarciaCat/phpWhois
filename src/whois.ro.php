@@ -26,7 +26,7 @@ if (!defined('__RO_HANDLER__')) {
     define('__RO_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 /**
  * @TODO BUG

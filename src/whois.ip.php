@@ -31,7 +31,9 @@ use phpWhois\WhoisClient;
 class ip_handler extends WhoisClient
 {
 
-    /** @var Deep whois? */
+    /**
+     * @var Deep whois? 
+     */
     public $deepWhois = true;
     public $REGISTRARS = array(
         'European Regional Internet Registry/RIPE NCC' => 'whois.ripe.net',
@@ -200,13 +202,13 @@ class ip_handler extends WhoisClient
                 unset($result['regrinfo']['rwhois']);
             } elseif (!@empty($rwres['regrinfo']['owner']['organization'])) {
                 switch ($rwres['regrinfo']['owner']['organization']) {
-                    case 'KRNIC':
-                        $this->handle_rwhois('whois.krnic.net', $query);
-                        break;
+                case 'KRNIC':
+                    $this->handle_rwhois('whois.krnic.net', $query);
+                    break;
 
-                    case 'African Network Information Center':
-                        $this->handle_rwhois('whois.afrinic.net', $query);
-                        break;
+                case 'African Network Information Center':
+                    $this->handle_rwhois('whois.afrinic.net', $query);
+                    break;
                 }
             }
         }

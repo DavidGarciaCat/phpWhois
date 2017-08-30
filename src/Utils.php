@@ -31,7 +31,8 @@ class Utils extends Whois
 {
     /**
      * Wrap result in <pre></pre> tags
-     * @param $obj
+     *
+     * @param  $obj
      * @return string
      */
     public function showObject(&$obj)
@@ -42,8 +43,9 @@ class Utils extends Whois
 
     /**
      * Return object or array as formatted string
-     * @param $obj
-     * @param int $indent
+     *
+     * @param  $obj
+     * @param  int $indent
      * @return string
      */
     public function debugObject($obj, $indent = 0)

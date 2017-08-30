@@ -26,7 +26,7 @@ if (!defined('__CO_HANDLER__')) {
     define('__CO_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class co_handler
 {

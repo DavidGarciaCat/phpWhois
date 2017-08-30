@@ -26,7 +26,7 @@ if (!defined('__CA_HANDLER__')) {
     define('__CA_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class ca_handler
 {

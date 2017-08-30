@@ -26,7 +26,7 @@ if (!defined('__WILDWESTDOMAINS_HANDLER__')) {
     define('__WILDWESTDOMAINS_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class wildwestdomains_handler
 {

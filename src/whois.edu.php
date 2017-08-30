@@ -26,7 +26,7 @@ if (!defined('__EDU_HANDLER__')) {
     define('__EDU_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class edu_handler
 {

@@ -26,7 +26,7 @@ if (!defined('__INT_HANDLER__')) {
     define('__INT_HANDLER__', 1);
 }
 
-require_once('whois.gtld.iana.php');
+require_once 'whois.gtld.iana.php';
 
 class int_handler
 {

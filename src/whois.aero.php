@@ -26,7 +26,7 @@ if (!defined('__AERO_HANDLER__')) {
     define('__AERO_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class aero_handler
 {

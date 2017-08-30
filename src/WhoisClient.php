@@ -33,40 +33,64 @@ use phpWhois\IpTools;
  */
 class WhoisClient
 {
-    /** @var boolean Is recursion allowed? */
+    /**
+     * @var boolean Is recursion allowed? 
+     */
     public $gtldRecurse = false;
 
-    /** @var int Default WHOIS port */
+    /**
+     * @var int Default WHOIS port 
+     */
     public $port = 43;
 
-    /** @var int Maximum number of retries on connection failure */
+    /**
+     * @var int Maximum number of retries on connection failure 
+     */
     public $retry = 0;
 
-    /** @var int Time to wait between retries */
+    /**
+     * @var int Time to wait between retries 
+     */
     public $sleep = 2;
 
-    /** @var int Read buffer size (0 == char by char) */
+    /**
+     * @var int Read buffer size (0 == char by char) 
+     */
     public $buffer = 1024;
 
-    /** @var int Communications timeout */
+    /**
+     * @var int Communications timeout 
+     */
     public $stimeout = 10;
 
-    /** @var string[] List of servers and handlers (loaded from servers.whois) */
+    /**
+     * @var string[] List of servers and handlers (loaded from servers.whois) 
+     */
     public $DATA = array();
 
-    /** @var string[] Non UTF-8 servers */
+    /**
+     * @var string[] Non UTF-8 servers 
+     */
     public $NON_UTF8 = array();
 
-    /** @var string[] List of Whois servers with special parameters */
+    /**
+     * @var string[] List of Whois servers with special parameters 
+     */
     public $WHOIS_PARAM = array();
 
-    /** @var string[] TLD's that have special whois servers or that can only be reached via HTTP */
+    /**
+     * @var string[] TLD's that have special whois servers or that can only be reached via HTTP 
+     */
     public $WHOIS_SPECIAL = array();
 
-    /** @var string[] Handled gTLD whois servers */
+    /**
+     * @var string[] Handled gTLD whois servers 
+     */
     public $WHOIS_GTLD_HANDLER = array();
 
-    /** @var string[] Array to contain all query publiciables */
+    /**
+     * @var string[] Array to contain all query publiciables 
+     */
     public $query = array(
         'tld' => '',
         'type' => 'domain',
@@ -75,10 +99,14 @@ class WhoisClient
         'server'
     );
 
-    /** @var string Current release of the package */
+    /**
+     * @var string Current release of the package 
+     */
     public $codeVersion = null;
 
-    /** @var string Full code and data version string (e.g. 'Whois2.php v3.01:16') */
+    /**
+     * @var string Full code and data version string (e.g. 'Whois2.php v3.01:16') 
+     */
     public $version;
 
     /**
@@ -87,7 +115,7 @@ class WhoisClient
     public function __construct()
     {
         // Load DATA array
-        $servers = require('whois.servers.php');
+        $servers = include 'whois.servers.php';
 
         $this->DATA               = $servers['DATA'];
         $this->NON_UTF8           = $servers['NON_UTF8'];
@@ -121,8 +149,8 @@ class WhoisClient
         }
 
         // Check if protocol is http
-        if (substr($this->query['server'], 0, 7) == 'http://' ||
-            substr($this->query['server'], 0, 8) == 'https://'
+        if (substr($this->query['server'], 0, 7) == 'http://' 
+            || substr($this->query['server'], 0, 8) == 'https://'
         ) {
             $output = $this->httpQuery($this->query['server']);
 
@@ -305,7 +333,7 @@ class WhoisClient
     /**
      * Adds whois server query information to result
      *
-     * @param $result array Result array
+     * @param  $result array Result array
      * @return array Original result array with server query information
      */
     public function setWhoisInfo($result)
@@ -421,7 +449,9 @@ class WhoisClient
             $server = $this->query['server'];
         }
 
-        /** @TODO Throw an exception here */
+        /**
+ * @TODO Throw an exception here 
+*/
         if (empty($server)) {
             return false;
         }
@@ -478,7 +508,7 @@ class WhoisClient
         $HANDLER_FLAG = sprintf("__%s_HANDLER__", strtoupper($handler_name));
 
         if (!defined($HANDLER_FLAG)) {
-            include($this->query['file']);
+            include $this->query['file'];
         }
 
         // If the handler has still not been included, append to query errors list and return
@@ -643,7 +673,7 @@ class WhoisClient
     /**
      * Parse server string into array with host and port keys
      *
-     * @param $server   server string in various formattes
+     * @param  $server   server string in various formattes
      * @return array    Array containing 'host' key with server host and 'port' if defined in original $server string
      */
     public function parseServer($server)

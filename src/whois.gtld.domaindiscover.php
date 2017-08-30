@@ -26,7 +26,7 @@ if (!defined('__DOMAINDISCOVER_HANDLER__')) {
     define('__DOMAINDISCOVER_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class domaindiscover_handler
 {

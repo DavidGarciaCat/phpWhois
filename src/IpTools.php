@@ -32,8 +32,8 @@ class IpTools
     /**
      * Check if ip address is valid
      *
-     * @param string $ip IP address for validation
-     * @param string $type Type of ip address. Possible value are: any, ipv4, ipv6
+     * @param string  $ip     IP address for validation
+     * @param string  $type   Type of ip address. Possible value are: any, ipv4, ipv6
      * @param boolean $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean True if ip is valid. False otherwise
@@ -41,14 +41,14 @@ class IpTools
     public function validIp($ip, $type = 'any', $strict = true)
     {
         switch ($type) {
-            case 'any':
-                return $this->validIpv4($ip, $strict) || $this->validIpv6($ip, $strict);
+        case 'any':
+            return $this->validIpv4($ip, $strict) || $this->validIpv6($ip, $strict);
                 break;
-            case 'ipv4':
-                return $this->validIpv4($ip, $strict);
+        case 'ipv4':
+            return $this->validIpv4($ip, $strict);
                 break;
-            case 'ipv6':
-                return $this->validIpv6($ip, $strict);
+        case 'ipv6':
+            return $this->validIpv6($ip, $strict);
                 break;
         }
         return false;
@@ -58,7 +58,7 @@ class IpTools
      * Check if given IP is valid ipv4 address and doesn't belong to private and
      * reserved ranges
      *
-     * @param string $ip Ip address
+     * @param string  $ip     Ip address
      * @param boolean $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean
@@ -79,7 +79,7 @@ class IpTools
     /**
      * Check if given IP is valid ipv6 address and doesn't belong to private ranges
      *
-     * @param string $ip Ip address
+     * @param string  $ip     Ip address
      * @param boolean $strict If true - fail validation on reserved and private ip ranges
      *
      * @return boolean
@@ -137,7 +137,7 @@ class IpTools
      *
      * @TODO provide example
      *
-     * @param string $net
+     * @param  string $net
      * @return string
      */
     public function cidrConv($net)

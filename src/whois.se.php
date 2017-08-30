@@ -26,7 +26,7 @@ if (!defined('__SE_HANDLER__')) {
     define('__SE_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class se_handler
 {

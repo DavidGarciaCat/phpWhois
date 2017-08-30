@@ -34,7 +34,7 @@ if (!defined('__PT_HANDLER__')) {
     define('__PT_HANDLER__', 1);
 }
 
-require_once('whois.parser.php');
+require_once 'whois.parser.php';
 
 class pt_handler
 {
