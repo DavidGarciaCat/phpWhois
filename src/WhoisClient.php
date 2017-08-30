@@ -107,7 +107,6 @@ class WhoisClient
      */
     public function getRawData($query)
     {
-
         $this->query['query'] = $query;
 
         // clear error description
@@ -418,7 +417,6 @@ class WhoisClient
      */
     public function connect($server = null)
     {
-
         if (empty($server)) {
             $server = $this->query['server'];
         }
@@ -474,7 +472,6 @@ class WhoisClient
 
     public function process(&$result, $deep_whois = true)
     {
-
         $handler_name = str_replace('.', '_', $this->query['handler']);
 
         // If the handler has not already been included somehow, include it now
@@ -520,7 +517,6 @@ class WhoisClient
      */
     public function deepWhois($query, $result)
     {
-
         if (!isset($result['regyinfo']['whois'])) {
             return $result;
         }
@@ -565,7 +561,6 @@ class WhoisClient
      */
     public function mergeResults($a1, $a2)
     {
-
         reset($a2);
 
         while (list($key, $val) = each($a2)) {
