@@ -30,11 +30,11 @@ Installation
 
 #### Stable version
 
-`php composer.phar require "phpwhois/phpwhois":"~4.0"`
+`php composer.phar require david-garcia/phpwhois`
 
 #### Latest development version
 
-`php composer.phar require "phpwhois/phpwhois":"dev-master"`
+`php composer.phar require "david-garcia/phpwhois":"dev-master"`
 
 
 Example usage
