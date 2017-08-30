@@ -1,7 +1,7 @@
 {
-    "name": "phpwhois/phpwhois",
+    "name": "david-garcia/phpwhois",
     "description": "phpWhois - library for querying whois services and parsing results. Based on phpwhois.org",
-    "keywords": ["PHP","Whois","phpWhois"],
+    "keywords": ["PHP", "Whois", "phpWhois"],
     "homepage": "http://phpwhois.pw",
     "type": "library",
     "license": "GPL-2.0",
@@ -21,6 +21,10 @@
         {
             "name": "Dmitry Lukashin",
             "email": "dmitry@lukashin.ru"
+        },
+        {
+            "name": "David Garcia",
+            "email": "me@davidgarcia.cat"
         }
     ],
     "minimum-stability": "dev",
