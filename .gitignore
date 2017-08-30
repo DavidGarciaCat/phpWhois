@@ -2,3 +2,4 @@ composer.lock
 /vendor
 nbproject
 .idea
+.php_cs.cache
