@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__NAMES4EVER_HANDLER__')) {
     define('__NAMES4EVER_HANDLER__', 1);
 }
@@ -32,20 +32,20 @@ class names4ever_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact',
-            'tech' => 'Technical  Contact',
-            'domain.name' => 'Domain Name:',
-            'domain.sponsor' => 'Registrar Name....:',
+        $items = [
+            'owner'           => 'Registrant:',
+            'admin'           => 'Administrative Contact',
+            'tech'            => 'Technical  Contact',
+            'domain.name'     => 'Domain Name:',
+            'domain.sponsor'  => 'Registrar Name....:',
             'domain.referrer' => 'Registrar Homepage:',
-            'domain.nserver' => 'DNS Servers:',
-            'domain.created' => 'Record created on',
-            'domain.expires' => 'Record expires on',
-            'domain.changed' => 'Record last updated on',
-            'domain.status' => 'Domain status:'
-        );
+            'domain.nserver'  => 'DNS Servers:',
+            'domain.created'  => 'Record created on',
+            'domain.expires'  => 'Record expires on',
+            'domain.changed'  => 'Record last updated on',
+            'domain.status'   => 'Domain status:',
+        ];
 
-        return easy_parser($data_str, $items, 'dmy', array(), false, true);
+        return easy_parser($data_str, $items, 'dmy', [], false, true);
     }
 }

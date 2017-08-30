@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__CORPORATEDOMAINS_HANDLER__')) {
     define('__CORPORATEDOMAINS_HANDLER__', 1);
 }
@@ -32,19 +32,19 @@ class corporatedomains_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact',
-            'tech' => 'Technical Contact',
-            'zone' => 'Zone Contact',
-            'domain.name' => 'Domain Name:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrative Contact',
+            'tech'           => 'Technical Contact',
+            'zone'           => 'Zone Contact',
+            'domain.name'    => 'Domain Name:',
             'domain.changed' => 'Last updated on',
             'domain.created' => 'Domain created on',
             'domain.expires' => 'Domain expires on',
             'domain.sponsor' => 'Registrar Name....:',
-            'domain.nserver' => 'DNS Servers:'
-        );
+            'domain.nserver' => 'DNS Servers:',
+        ];
 
-        return easy_parser($data_str, $items, 'dmy', array(), false, true);
+        return easy_parser($data_str, $items, 'dmy', [], false, true);
     }
 }

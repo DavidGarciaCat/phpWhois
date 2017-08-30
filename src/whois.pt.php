@@ -40,23 +40,24 @@ class pt_handler
 {
     public function parse($data, $query)
     {
-        $items = array(
-                    'domain.name'        => ' / Domain Name:',
-                    'domain.created'    => 'Data de registo / Creation Date (dd/mm/yyyy):',
-                    'domain.nserver.'    => 'Nameserver:',
+        $items = [
+                    'domain.name'          => ' / Domain Name:',
+                    'domain.created'       => 'Data de registo / Creation Date (dd/mm/yyyy):',
+                    'domain.nserver.'      => 'Nameserver:',
                     'domain.status'        => 'Estado / Status:',
                     'owner'                => 'Titular / Registrant',
-                    'billing'            => 'Entidade Gestora / Billing Contact',
+                    'billing'              => 'Entidade Gestora / Billing Contact',
                     'admin'                => 'Responsável Administrativo / Admin Contact',
-                    'tech'                => 'Responsável Técnico / Tech Contact',
-                    '#'                    => 'Nameserver Information'
-                    );
+                    'tech'                 => 'Responsável Técnico / Tech Contact',
+                    '#'                    => 'Nameserver Information',
+                    ];
 
         $r['regrinfo'] = get_blocks($data['rawdata'], $items);
 
         if (empty($r['regrinfo']['domain']['name'])) {
             print_r($r['regrinfo']);
             $r['regrinfo']['registered'] = 'no';
+
             return $r;
         }
 
@@ -69,10 +70,10 @@ class pt_handler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.fccn.pt',
-            'registrar' => 'FCCN'
-            );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.fccn.pt',
+            'registrar' => 'FCCN',
+            ];
 
         return $r;
     }

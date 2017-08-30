@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__MX_HANDLER__')) {
     define('__MX_HANDLER__', 1);
 }
@@ -32,31 +32,31 @@ class mx_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact:',
-            'tech' => 'Technical Contact:',
-            'billing' => 'Billing Contact:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrative Contact:',
+            'tech'           => 'Technical Contact:',
+            'billing'        => 'Billing Contact:',
             'domain.nserver' => 'Name Servers:',
             'domain.created' => 'Created On:',
             'domain.expires' => 'Expiration Date:',
             'domain.changed' => 'Last Updated On:',
-            'domain.sponsor' => 'Registrar:'
-        );
+            'domain.sponsor' => 'Registrar:',
+        ];
 
-        $extra = array(
-            'city:' => 'address.city',
+        $extra = [
+            'city:'  => 'address.city',
             'state:' => 'address.state',
-            'dns:' => '0'
-        );
+            'dns:'   => '0',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'dmy', $extra);
 
-        $r['regyinfo'] = array(
+        $r['regyinfo'] = [
             'registrar' => 'NIC Mexico',
-            'referrer' => 'http://www.nic.mx/'
-        );
+            'referrer'  => 'http://www.nic.mx/',
+        ];
 
         if (empty($r['regrinfo']['domain']['created'])) {
             $r['regrinfo']['registered'] = 'no';

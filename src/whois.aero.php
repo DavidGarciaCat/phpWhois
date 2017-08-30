@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__AERO_HANDLER__')) {
     define('__AERO_HANDLER__', 1);
 }
@@ -32,12 +32,13 @@ class aero_handler
 {
     public function parse($data_str, $query)
     {
-        $r = array();
-        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], array(), 'ymd');
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.aero',
-            'registrar' => 'Societe Internationale de Telecommunications Aeronautiques SC'
-        );
+        $r = [];
+        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], [], 'ymd');
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.aero',
+            'registrar' => 'Societe Internationale de Telecommunications Aeronautiques SC',
+        ];
+
         return $r;
     }
 }

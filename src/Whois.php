@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
@@ -25,41 +26,40 @@
 namespace phpWhois;
 
 /**
- * phpWhois main class
+ * phpWhois main class.
  *
  * This class supposed to be instantiated for using the phpWhois library
  */
 class Whois extends WhoisClient
 {
-
     /**
-     * @var boolean Deep whois? 
+     * @var bool Deep whois?
      */
     public $deepWhois = true;
 
     /**
-     * @inheritdoc 
+     * {@inheritdoc}
      */
     public $gtldRecurse = true;
 
     /**
-     * @var array Query array 
+     * @var array Query array
      */
-    public $query = array();
+    public $query = [];
 
     /**
-     * @var string Network Solutions registry server 
+     * @var string Network Solutions registry server
      */
     public $nsiRegistry = 'whois.nsiregistry.net';
 
     const QTYPE_UNKNOWN = 0;
-    const QTYPE_DOMAIN  = 1;
-    const QTYPE_IPV4    = 2;
-    const QTYPE_IPV6    = 3;
-    const QTYPE_AS      = 4;
+    const QTYPE_DOMAIN = 1;
+    const QTYPE_IPV4 = 2;
+    const QTYPE_IPV6 = 3;
+    const QTYPE_AS = 4;
 
     /**
-     * Use special whois server (Populate WHOIS_SPECIAL array)
+     * Use special whois server (Populate WHOIS_SPECIAL array).
      *
      * @param string $tld    Top-level domain
      * @param string $server Server address
@@ -70,15 +70,15 @@ class Whois extends WhoisClient
     }
 
     /**
-     *  Lookup query
+     *  Lookup query.
      *
-     * @param string  $query  Domain name or other entity
-     * @param boolean $is_utf True if domain name encoding is utf-8 already, otherwise convert it with utf8_encode() first
+     * @param string $query  Domain name or other entity
+     * @param bool   $is_utf True if domain name encoding is utf-8 already, otherwise convert it with utf8_encode() first
      */
     public function lookup($query = '', $is_utf = true)
     {
         // start clean
-        $this->query = array('status' => '');
+        $this->query = ['status' => ''];
 
         $query = trim($query);
 
@@ -94,6 +94,7 @@ class Whois extends WhoisClient
         if (!isset($query) || $query == '') {
             // Configure to use default whois server
             $this->query['server'] = $this->nsiRegistry;
+
             return;
         }
 
@@ -138,6 +139,7 @@ class Whois extends WhoisClient
             }
             $this->query['query'] = $ip;
             $this->query['tld'] = 'ip';
+
             return $this->getData('', $this->deepWhois);
                 break;
 
@@ -155,6 +157,7 @@ class Whois extends WhoisClient
             $this->query['handler'] = 'ip';
             $this->query['query'] = $ip;
             $this->query['tld'] = 'as';
+
             return $this->getData('', $this->deepWhois);
                 break;
         }
@@ -164,7 +167,7 @@ class Whois extends WhoisClient
         $server = '';
         $dp = explode('.', $domain);
         $np = count($dp) - 1;
-        $tldtests = array();
+        $tldtests = [];
 
         for ($i = 0; $i < $np; $i++) {
             array_shift($dp);
@@ -197,12 +200,12 @@ class Whois extends WhoisClient
                 // Determine the top level domain, and it's whois server using
                 // DNS lookups on 'whois-servers.net'.
                 // Assumes a valid DNS response indicates a recognised tld (!?)
-                $cname = $tld . '.whois-servers.net';
+                $cname = $tld.'.whois-servers.net';
 
                 if (gethostbyname($cname) == $cname) {
                     continue;
                 }
-                $server = $tld . '.whois-servers.net';
+                $server = $tld.'.whois-servers.net';
                 break;
             }
         }
@@ -221,7 +224,7 @@ class Whois extends WhoisClient
                 }
 
                 // Regular handler exists for the tld ?
-                if (file_exists('whois.' . $htld . '.php')) {
+                if (file_exists('whois.'.$htld.'.php')) {
                     $handler = $htld;
                     break;
                 }
@@ -235,7 +238,7 @@ class Whois extends WhoisClient
 
             // Special parameters ?
             if (isset($this->WHOIS_PARAM[$server])) {
-                $this->query['server'] = $this->query['server'] . '?' . str_replace(
+                $this->query['server'] = $this->query['server'].'?'.str_replace(
                     '$',
                     $domain,
                     $this->WHOIS_PARAM[$server]
@@ -244,6 +247,7 @@ class Whois extends WhoisClient
 
             $result = $this->getData('', $this->deepWhois);
             $this->checkDns($result);
+
             return $result;
         }
 
@@ -252,21 +256,22 @@ class Whois extends WhoisClient
     }
 
     /**
-     * Unsupported domains
+     * Unsupported domains.
      */
     public function unknown()
     {
         unset($this->query['server']);
         $this->query['status'] = 'error';
-        $result = array('rawdata' => array());
-        $result['rawdata'][] = $this->query['errstr'][] = $this->query['query'] . ' domain is not supported';
+        $result = ['rawdata' => []];
+        $result['rawdata'][] = $this->query['errstr'][] = $this->query['query'].' domain is not supported';
         $this->checkDns($result);
         $this->fixResult($result, $this->query['query']);
+
         return $result;
     }
 
     /**
-     * Get nameservers if missing
+     * Get nameservers if missing.
      */
     public function checkDns(&$result)
     {
@@ -275,7 +280,7 @@ class Whois extends WhoisClient
             if (!is_array($ns)) {
                 return;
             }
-            $nserver = array();
+            $nserver = [];
             foreach ($ns as $row) {
                 $nserver[] = $row['target'];
             }
@@ -286,7 +291,7 @@ class Whois extends WhoisClient
     }
 
     /**
-     *  Fix and/or add name server information
+     *  Fix and/or add name server information.
      */
     public function fixResult(&$result, $domain)
     {
@@ -313,7 +318,7 @@ class Whois extends WhoisClient
     }
 
     /**
-     * Guess query type
+     * Guess query type.
      *
      * @param string $query
      *
@@ -321,7 +326,7 @@ class Whois extends WhoisClient
      */
     public function getQueryType($query)
     {
-        $ipTools = new IpTools;
+        $ipTools = new IpTools();
 
         if ($ipTools->validIp($query, 'ipv4', false)) {
             if ($ipTools->validIp($query, 'ipv4')) {

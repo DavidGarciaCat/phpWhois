@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__JOKER_HANDLER__')) {
     define('__JOKER_HANDLER__', 1);
 }
@@ -32,32 +32,32 @@ class joker_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
+        $translate = [
             'contact-hdl' => 'handle',
-            'modified' => 'changed',
-            'reseller' => 'sponsor',
-            'address' => 'address.street',
+            'modified'    => 'changed',
+            'reseller'    => 'sponsor',
+            'address'     => 'address.street',
             'postal-code' => 'address.pcode',
-            'city' => 'address.city',
-            'state' => 'address.state',
-            'country' => 'address.country',
-            'person' => 'name',
-            'domain' => 'name'
-        );
+            'city'        => 'address.city',
+            'state'       => 'address.state',
+            'country'     => 'address.country',
+            'person'      => 'name',
+            'domain'      => 'name',
+        ];
 
-        $contacts = array(
-            'admin-c' => 'admin',
-            'tech-c' => 'tech',
-            'billing-c' => 'billing'
-        );
+        $contacts = [
+            'admin-c'   => 'admin',
+            'tech-c'    => 'tech',
+            'billing-c' => 'billing',
+        ];
 
-        $items = array(
-            'owner' => 'name',
+        $items = [
+            'owner'        => 'name',
             'organization' => 'organization',
-            'email' => 'email',
-            'phone' => 'phone',
-            'address' => 'address',
-        );
+            'email'        => 'email',
+            'phone'        => 'phone',
+            'address'      => 'address',
+        ];
 
         $r = generic_parser_a($data_str, $translate, $contacts, 'domain', 'Ymd');
 

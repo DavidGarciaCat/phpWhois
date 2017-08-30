@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__IL_HANDLER__')) {
     define('__IL_HANDLER__', 1);
 }
@@ -32,25 +32,25 @@ class il_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
-            'nic-hdl' => 'handle',
-            'person' => 'name',
+        $translate = [
+            'fax-no'     => 'fax',
+            'e-mail'     => 'email',
+            'nic-hdl'    => 'handle',
+            'person'     => 'name',
             'personname' => 'name',
-            'address' => 'address'/* ,
+            'address'    => 'address', /* ,
                   'address' => 'address.city',
                   'address' => 'address.pcode',
                   'address' => 'address.country' */
-        );
+        ];
 
-        $contacts = array(
+        $contacts = [
             'registrant' => 'owner',
-            'admin-c' => 'admin',
-            'tech-c' => 'tech',
-            'billing-c' => 'billing',
-            'zone-c' => 'zone'
-        );
+            'admin-c'    => 'admin',
+            'tech-c'     => 'tech',
+            'billing-c'  => 'billing',
+            'zone-c'     => 'zone',
+        ];
         //unset($data_str['rawdata'][19]);
         array_splice($data_str['rawdata'], 16, 1);
         array_splice($data_str['rawdata'], 18, 1);
@@ -90,12 +90,13 @@ class il_handler
             }
         }
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.isoc.org.il/',
-            'registrar' => 'ISOC-IL'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.isoc.org.il/',
+            'registrar' => 'ISOC-IL',
+        ];
+
         return $r;
     }
 }

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__HU_HANDLER__')) {
     define('__HU_HANDLER__', 1);
 }
@@ -32,12 +32,12 @@ class hu_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'domain:' => 'domain.name',
-            'record created:' => 'domain.created'
-        );
+        $items = [
+            'domain:'         => 'domain.name',
+            'record created:' => 'domain.created',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'ymd');
 
         if (isset($r['regrinfo']['domain'])) {
@@ -46,7 +46,8 @@ class hu_handler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array('referrer' => 'http://www.nic.hu', 'registrar' => 'HUNIC');
+        $r['regyinfo'] = ['referrer' => 'http://www.nic.hu', 'registrar' => 'HUNIC'];
+
         return $r;
     }
 }

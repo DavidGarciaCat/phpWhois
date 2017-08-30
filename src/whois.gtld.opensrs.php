@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__OPENSRS_HANDLER__')) {
     define('__OPENSRS_HANDLER__', 1);
 }
@@ -32,20 +32,20 @@ class opensrs_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'admin' => 'Administrative Contact',
-            'tech' => 'Technical Contact',
-            'domain.name' => 'Domain name:',
-            '' => 'Registration Service Provider:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'admin'          => 'Administrative Contact',
+            'tech'           => 'Technical Contact',
+            'domain.name'    => 'Domain name:',
+            ''               => 'Registration Service Provider:',
             'domain.nserver' => 'Domain servers in listed order:',
             'domain.changed' => 'Record last updated on',
             'domain.created' => 'Record created on',
             'domain.expires' => 'Record expires on',
-            'domain.sponsor' => 'Registrar of Record:'
-        );
+            'domain.sponsor' => 'Registrar of Record:',
+        ];
 
-        $r = easy_parser($data_str, $items, 'dmy', array(), false, true);
+        $r = easy_parser($data_str, $items, 'dmy', [], false, true);
 
         if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor'])) {
             $r['domain']['sponsor'] = $r['domain']['sponsor'][0];

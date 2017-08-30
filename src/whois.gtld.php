@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__GTLD_HANDLER__')) {
     define('__GTLD_HANDLER__', 1);
 }
@@ -32,26 +32,26 @@ require_once 'whois.parser.php';
 
 class gtld_handler extends WhoisClient
 {
-    public $REG_FIELDS = array(
-        'Domain Name:' => 'regrinfo.domain.name',
-        'Registrar:' => 'regyinfo.registrar',
-        'Whois Server:' => 'regyinfo.whois',
-        'Referral URL:' => 'regyinfo.referrer',
-        'Name Server:' => 'regrinfo.domain.nserver.', // identical descriptors
-        'Updated Date:' => 'regrinfo.domain.changed',
+    public $REG_FIELDS = [
+        'Domain Name:'     => 'regrinfo.domain.name',
+        'Registrar:'       => 'regyinfo.registrar',
+        'Whois Server:'    => 'regyinfo.whois',
+        'Referral URL:'    => 'regyinfo.referrer',
+        'Name Server:'     => 'regrinfo.domain.nserver.', // identical descriptors
+        'Updated Date:'    => 'regrinfo.domain.changed',
         'Last Updated On:' => 'regrinfo.domain.changed',
-        'EPP Status:' => 'regrinfo.domain.epp_status.',
-        'Status:' => 'regrinfo.domain.status.',
-        'Creation Date:' => 'regrinfo.domain.created',
-        'Created On:' => 'regrinfo.domain.created',
+        'EPP Status:'      => 'regrinfo.domain.epp_status.',
+        'Status:'          => 'regrinfo.domain.status.',
+        'Creation Date:'   => 'regrinfo.domain.created',
+        'Created On:'      => 'regrinfo.domain.created',
         'Expiration Date:' => 'regrinfo.domain.expires',
-        'Updated Date:' => 'regrinfo.domain.changed',
-        'No match for ' => 'nodomain'
-    );
+        'Updated Date:'    => 'regrinfo.domain.changed',
+        'No match for '    => 'nodomain',
+    ];
 
     public function parse($data, $query)
     {
-        $this->query = array();
+        $this->query = [];
         $this->result = generic_parser_b($data['rawdata'], $this->REG_FIELDS, 'dmy');
 
         unset($this->result['registered']);
@@ -59,6 +59,7 @@ class gtld_handler extends WhoisClient
         if (isset($this->result['nodomain'])) {
             unset($this->result['nodomain']);
             $this->result['regrinfo']['registered'] = 'no';
+
             return $this->result;
         }
 

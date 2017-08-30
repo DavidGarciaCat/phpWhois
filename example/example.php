@@ -1,48 +1,50 @@
 <?php
 /**
- * phpWhois Example
- * 
+ * phpWhois Example.
+ *
  * This class supposed to be instantiated for using the phpWhois library
- * 
+ *
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @license
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 header('Content-Type: text/html; charset=UTF-8');
 
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     require_once __DIR__.'/../vendor/autoload.php';
 }
 
-use phpWhois\Whois;
 use phpWhois\Utils;
+use phpWhois\Whois;
+
 $whois = new Whois();
 
 if (isset($_GET['query'])) {
     $query = $_GET['query'];
 
-    if (!empty($_GET['output']))
+    if (!empty($_GET['output'])) {
         $output = $_GET['output'];
-    else
+    } else {
         $output = '';
+    }
 
     // Set to true if you want to allow proxy requests
     $allowproxy = false;
@@ -63,35 +65,36 @@ if (isset($_GET['query'])) {
             if ($whois->query['status'] < 0) {
                 $winfo = implode($whois->query['errstr'], "\n<br></br>");
             } else {
-                $utils = new Utils;
+                $utils = new Utils();
                 $winfo = $utils->showObject($result);
             }
             break;
 
         case 'nice':
             if (!empty($result['rawdata'])) {
-                $utils = new Utils;
+                $utils = new Utils();
                 $winfo = $utils->showHTML($result);
             } else {
-                if (isset($whois->query['errstr']))
+                if (isset($whois->query['errstr'])) {
                     $winfo = implode($whois->query['errstr'], "\n<br></br>");
-                else
+                } else {
                     $winfo = 'Unexpected error';
+                }
             }
             break;
 
         case 'proxy':
-            if ($allowproxy)
+            if ($allowproxy) {
                 exit(serialize($result));
+            }
 
         default:
             if (!empty($result['rawdata'])) {
-                $winfo .= '<pre>' . implode($result['rawdata'], "\n") . '</pre>';
+                $winfo .= '<pre>'.implode($result['rawdata'], "\n").'</pre>';
             } else {
                 $winfo = implode($whois->query['errstr'], "\n<br></br>");
             }
     }
-
 }
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/html4/loose.dtd">
@@ -151,7 +154,7 @@ Placed under the GPL. See the LICENSE file in the distribution.
 <?php if (!empty($query)):?>
 <?php
 // @TODO
-//XSS attack here ?>
+//XSS attack here?>
 <p><b>Results for <?php echo $query?> :</b></p>
 <blockquote>
 <?php echo $winfo ?>

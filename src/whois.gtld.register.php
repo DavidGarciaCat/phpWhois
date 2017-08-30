@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__REGISTER_HANDLER__')) {
     define('__REGISTER_HANDLER__', 1);
 }
@@ -32,27 +32,27 @@ class register_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner#0' => 'Registrant Info:',
-            'owner#1' => 'Organization:',
-            'owner#2' => 'Registrant:',
-            'owner#3' => 'Registrant Contact:',
-            'admin' => 'Administrative',
-            'tech' => 'Technical',
-            'zone' => 'Zone',
+        $items = [
+            'owner#0'          => 'Registrant Info:',
+            'owner#1'          => 'Organization:',
+            'owner#2'          => 'Registrant:',
+            'owner#3'          => 'Registrant Contact:',
+            'admin'            => 'Administrative',
+            'tech'             => 'Technical',
+            'zone'             => 'Zone',
             'domain.sponsor#0' => 'Registrar Name....:',
             'domain.sponsor#1' => 'Registration Service Provided By:',
-            'domain.referrer' => 'Registrar Homepage:',
-            'domain.nserver' => 'Domain servers in listed order:',
-            'domain.nserver' => 'DNS Servers:',
-            'domain.name' => 'Domain name:',
+            'domain.referrer'  => 'Registrar Homepage:',
+            'domain.nserver'   => 'Domain servers in listed order:',
+            'domain.nserver'   => 'DNS Servers:',
+            'domain.name'      => 'Domain name:',
             'domain.created#0' => 'Created on..............:',
             'domain.created#1' => 'Creation date:',
             'domain.expires#0' => 'Expires on..............:',
             'domain.expires#1' => 'Expiration date:',
-            'domain.changed' => 'Record last updated on..:',
-            'domain.status' => 'Status:'
-        );
+            'domain.changed'   => 'Record last updated on..:',
+            'domain.status'    => 'Status:',
+        ];
 
         return easy_parser($data_str, $items, 'ymd');
     }

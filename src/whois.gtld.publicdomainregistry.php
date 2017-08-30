@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__PUBLICDOMAINREGISTRY_HANDLER__')) {
     define('__PUBLICDOMAINREGISTRY_HANDLER__', 1);
 }
@@ -32,23 +32,23 @@ class publicdomainregistry_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'owner#' => '(Registrant):',
-            'admin' => 'Administrative Contact',
-            'tech' => 'Technical Contact',
-            'billing' => 'Billing Contact',
-            'domain.name' => 'Domain name:',
-            'domain.sponsor' => 'Registration Service Provided By:',
-            'domain.nserver' => 'Domain servers in listed order:',
-            'domain.changed' => 'Record last updated ',
-            'domain.created' => 'Record created on',
+        $items = [
+            'owner'           => 'Registrant:',
+            'owner#'          => '(Registrant):',
+            'admin'           => 'Administrative Contact',
+            'tech'            => 'Technical Contact',
+            'billing'         => 'Billing Contact',
+            'domain.name'     => 'Domain name:',
+            'domain.sponsor'  => 'Registration Service Provided By:',
+            'domain.nserver'  => 'Domain servers in listed order:',
+            'domain.changed'  => 'Record last updated ',
+            'domain.created'  => 'Record created on',
             'domain.created#' => 'Creation Date:',
-            'domain.expires' => 'Record expires on',
+            'domain.expires'  => 'Record expires on',
             'domain.expires#' => 'Expiration Date:',
-            'domain.status' => 'Status:'
-        );
+            'domain.status'   => 'Status:',
+        ];
 
-        return easy_parser($data_str, $items, 'mdy', array(), true, true);
+        return easy_parser($data_str, $items, 'mdy', [], true, true);
     }
 }

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__AM_HANDLER__')) {
     define('__AM_HANDLER__', 1);
 }
@@ -32,18 +32,18 @@ class am_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant:',
-            'domain.name' => 'Domain name:',
+        $items = [
+            'owner'          => 'Registrant:',
+            'domain.name'    => 'Domain name:',
             'domain.created' => 'Registered:',
             'domain.changed' => 'Last modified:',
             'domain.nserver' => 'DNS servers:',
-            'domain.status' => 'Status:',
-            'tech' => 'Technical contact:',
-            'admin' => 'Administrative contact:',
-        );
+            'domain.status'  => 'Status:',
+            'tech'           => 'Technical contact:',
+            'admin'          => 'Administrative contact:',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
         if (!empty($r['regrinfo']['domain']['name'])) {
@@ -54,10 +54,10 @@ class am_handler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.isoc.am',
-            'registrar' => 'ISOCAM'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.isoc.am',
+            'registrar' => 'ISOCAM',
+        ];
 
         return $r;
     }

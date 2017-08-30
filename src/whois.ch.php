@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 require_once 'whois.parser.php';
 
 if (!defined('__CH_HANDLER__')) {
@@ -32,21 +32,21 @@ class ch_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Holder of domain name:',
-            'domain.name' => 'Domain name:',
+        $items = [
+            'owner'          => 'Holder of domain name:',
+            'domain.name'    => 'Domain name:',
             'domain.created' => 'Date of last registration:',
             'domain.changed' => 'Date of last modification:',
-            'tech' => 'Technical contact:',
+            'tech'           => 'Technical contact:',
             'domain.nserver' => 'Name servers:',
-            'domain.dnssec' => 'DNSSEC:'
-        );
+            'domain.dnssec'  => 'DNSSEC:',
+        ];
 
-        $trans = array(
-            'contractual language:' => 'language'
-        );
+        $trans = [
+            'contractual language:' => 'language',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
         if (!empty($r['regrinfo']['domain']['name'])) {
@@ -68,10 +68,11 @@ class ch_handler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.ch',
-            'registrar' => 'SWITCH Domain Name Registration'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.ch',
+            'registrar' => 'SWITCH Domain Name Registration',
+        ];
+
         return $r;
     }
 }

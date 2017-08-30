@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__SU_HANDLER__')) {
     define('__SU_HANDLER__', 1);
 }
@@ -32,14 +32,14 @@ class su_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'domain:' => 'domain.name',
+        $items = [
+            'domain:'    => 'domain.name',
             'registrar:' => 'domain.sponsor',
-            'state:' => 'domain.status',
-            'person:' => 'owner.name',
-            'phone:' => 'owner.phone',
-            'e-mail:' => 'owner.email',
-            'created:' => 'domain.created',
+            'state:'     => 'domain.status',
+            'person:'    => 'owner.name',
+            'phone:'     => 'owner.phone',
+            'e-mail:'    => 'owner.email',
+            'created:'   => 'domain.created',
             'paid-till:' => 'domain.expires',
                 /*
                   'nserver:' => 'domain.nserver.',
@@ -48,15 +48,16 @@ class su_handler
                   'org:' => 'owner.organization',
                   'fax-no:' => 'owner.fax',
                  */
-        );
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items, 'dmy');
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.ripn.net',
-            'registrar' => 'RUCENTER-REG-RIPN'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.ripn.net',
+            'registrar' => 'RUCENTER-REG-RIPN',
+        ];
+
         return $r;
     }
 }

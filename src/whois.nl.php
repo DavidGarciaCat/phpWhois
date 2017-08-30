@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__NL_HANDLER__')) {
     define('__NL_HANDLER__', 1);
 }
@@ -32,24 +32,25 @@ class nl_handler
 {
     public function parse($data, $query)
     {
-        $items = array(
-            'domain.name' => 'Domain name:',
-            'domain.status' => 'Status:',
+        $items = [
+            'domain.name'    => 'Domain name:',
+            'domain.status'  => 'Status:',
             'domain.nserver' => 'Domain nameservers:',
             'domain.created' => 'Date registered:',
             'domain.changed' => 'Record last updated:',
             'domain.sponsor' => 'Registrar:',
-            'admin' => 'Administrative contact:',
-            'tech' => 'Technical contact(s):'
-        );
+            'admin'          => 'Administrative contact:',
+            'tech'           => 'Technical contact(s):',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = get_blocks($data['rawdata'], $items);
         $r['regyinfo']['referrer'] = 'http://www.domain-registry.nl';
         $r['regyinfo']['registrar'] = 'Stichting Internet Domeinregistratie NL';
 
         if (!isset($r['regrinfo']['domain']['status'])) {
             $r['regrinfo']['registered'] = 'no';
+
             return $r;
         }
 
@@ -71,6 +72,7 @@ class nl_handler
 
         $r['regrinfo']['registered'] = 'yes';
         format_dates($r, 'dmy');
+
         return $r;
     }
 

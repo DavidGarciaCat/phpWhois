@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__TRAVEL_HANDLER__')) {
     define('__TRAVEL_HANDLER__', 1);
 }
@@ -32,10 +32,11 @@ class travel_handler
 {
     public function parse($data_str, $query)
     {
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata']);
         $r['regyinfo']['referrer'] = 'http://www.nic.travel/';
         $r['regyinfo']['registrar'] = 'Tralliance Corporation';
+
         return $r;
     }
 }

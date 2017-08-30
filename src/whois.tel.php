@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__TEL_HANDLER__')) {
     define('__TEL_HANDLER__', 1);
 }
@@ -32,12 +32,13 @@ class tel_handler
 {
     public function parse($data_str, $query)
     {
-        $r = array();
-        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], array(), '-md--y');
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.telnic.org',
-            'registrar' => 'Telnic'
-        );
+        $r = [];
+        $r['regrinfo'] = generic_parser_b($data_str['rawdata'], [], '-md--y');
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.telnic.org',
+            'registrar' => 'Telnic',
+        ];
+
         return $r;
     }
 }

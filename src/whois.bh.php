@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__BH_HANDLER__')) {
     define('__BH_HANDLER__', 1);
 }
@@ -32,15 +32,15 @@ class bh_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'Sponsoring Registrar Name:' => 'domain.sponsor.name',
+        $items = [
+            'Sponsoring Registrar Name:'  => 'domain.sponsor.name',
             'Sponsoring Registrar Email:' => 'domain.sponsor.email',
-            'Sponsoring Registrar Uri:' => 'domain.sponsor.uri',
-            'Sponsoring Registrar Phone:' => 'domain.sponsor.phone'
-        );
+            'Sponsoring Registrar Uri:'   => 'domain.sponsor.uri',
+            'Sponsoring Registrar Phone:' => 'domain.sponsor.phone',
+        ];
         $i = generic_parser_b($data_str['rawdata'], $items);
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata']);
         if (isset($r['regrinfo']['domain']) && is_array($r['regrinfo']['domain'])) {
             $r['regrinfo']['domain']['sponsor'] = $i['domain']['sponsor'];
@@ -50,10 +50,11 @@ class bh_handler
         } else {
             $r['regrinfo']['registered'] = 'yes';
         }
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.bh/',
-            'registrar' => 'NIC-BH'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.bh/',
+            'registrar' => 'NIC-BH',
+        ];
+
         return $r;
     }
 }

@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__IANA_HANDLER__')) {
     define('__IANA_HANDLER__', 1);
 }
@@ -32,17 +32,17 @@ class iana_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'admin' => 'contact:      administrative',
-            'tech' => 'contact:      technical',
+        $items = [
+            'admin'           => 'contact:      administrative',
+            'tech'            => 'contact:      technical',
             'domain.nserver.' => 'nserver:',
-            'domain.created' => 'created:',
-            'domain.changed' => 'changed:',
-            'domain.source' => 'source:',
-            'domain.name' => 'domain:',
-            'disclaimer.' => '% '
-        );
+            'domain.created'  => 'created:',
+            'domain.changed'  => 'changed:',
+            'domain.source'   => 'source:',
+            'domain.name'     => 'domain:',
+            'disclaimer.'     => '% ',
+        ];
 
-        return easy_parser($data_str, $items, 'Ymd', array(), false, false, 'owner');
+        return easy_parser($data_str, $items, 'Ymd', [], false, false, 'owner');
     }
 }

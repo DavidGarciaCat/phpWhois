@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__NAME_HANDLER__')) {
     define('__NAME_HANDLER__', 1);
 }
@@ -32,21 +32,21 @@ class name_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'REGISTRANT CONTACT INFO',
-            'admin' => 'ADMINISTRATIVE CONTACT INFO',
-            'tech' => 'TECHNICAL CONTACT INFO',
-            'billing' => 'BILLING CONTACT INFO',
-            'domain.name' => 'Domain Name:',
+        $items = [
+            'owner'          => 'REGISTRANT CONTACT INFO',
+            'admin'          => 'ADMINISTRATIVE CONTACT INFO',
+            'tech'           => 'TECHNICAL CONTACT INFO',
+            'billing'        => 'BILLING CONTACT INFO',
+            'domain.name'    => 'Domain Name:',
             'domain.sponsor' => 'Registrar',
             'domain.created' => 'Creation Date',
-            'domain.expires' => 'Expiration Date'
-        );
+            'domain.expires' => 'Expiration Date',
+        ];
 
-        $extra = array(
-            'phone:' => 'phone',
-            'email address:' => 'email'
-        );
+        $extra = [
+            'phone:'         => 'phone',
+            'email address:' => 'email',
+        ];
 
         return easy_parser($data_str, $items, 'y-m-d', $extra, false, true);
     }

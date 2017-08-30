@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__FASTDOMAIN_HANDLER__')) {
     define('__FASTDOMAIN_HANDLER__', 1);
 }
@@ -32,19 +32,19 @@ class fastdomain_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Registrant Info:',
-            'admin' => 'Administrative Info:',
-            'tech' => 'Technical Info:',
-            'domain.name' => 'Domain Name:',
-            'domain.sponsor' => 'Provider Name....:',
+        $items = [
+            'owner'           => 'Registrant Info:',
+            'admin'           => 'Administrative Info:',
+            'tech'            => 'Technical Info:',
+            'domain.name'     => 'Domain Name:',
+            'domain.sponsor'  => 'Provider Name....:',
             'domain.referrer' => 'Provider Homepage:',
-            'domain.nserver' => 'Domain servers in listed order:',
-            'domain.created' => 'Created on..............:',
-            'domain.expires' => 'Expires on..............:',
-            'domain.changed' => 'Last modified on........:',
-            'domain.status' => 'Status:'
-        );
+            'domain.nserver'  => 'Domain servers in listed order:',
+            'domain.created'  => 'Created on..............:',
+            'domain.expires'  => 'Expires on..............:',
+            'domain.changed'  => 'Last modified on........:',
+            'domain.status'   => 'Status:',
+        ];
 
         while (list($key, $val) = each($data_str)) {
             $faststr = strpos($val, ' (FAST-');
@@ -53,7 +53,7 @@ class fastdomain_handler
             }
         }
 
-        $r = easy_parser($data_str, $items, 'dmy', array(), false, true);
+        $r = easy_parser($data_str, $items, 'dmy', [], false, true);
 
         if (isset($r['domain']['sponsor']) && is_array($r['domain']['sponsor'])) {
             $r['domain']['sponsor'] = $r['domain']['sponsor'][0];

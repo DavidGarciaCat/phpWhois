@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__LT_HANDLER__')) {
     define('__LT_HANDLER__', 1);
 }
@@ -32,31 +32,32 @@ class lt_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
+        $translate = [
             'contact nic-hdl:' => 'handle',
-            'contact name:' => 'name'
-        );
+            'contact name:'    => 'name',
+        ];
 
-        $items = array(
-            'admin' => 'Contact type:      Admin',
-            'tech' => 'Contact type:      Tech',
-            'zone' => 'Contact type:      Zone',
-            'owner.name' => 'Registrar:',
-            'owner.email' => 'Registrar email:',
-            'domain.status' => 'Status:',
-            'domain.created' => 'Registered:',
-            'domain.changed' => 'Last updated:',
+        $items = [
+            'admin'           => 'Contact type:      Admin',
+            'tech'            => 'Contact type:      Tech',
+            'zone'            => 'Contact type:      Zone',
+            'owner.name'      => 'Registrar:',
+            'owner.email'     => 'Registrar email:',
+            'domain.status'   => 'Status:',
+            'domain.created'  => 'Registered:',
+            'domain.changed'  => 'Last updated:',
             'domain.nserver.' => 'NS:',
-            '' => '%'
-        );
+            ''                => '%',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd', $translate);
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.domreg.lt',
-            'registrar' => 'DOMREG.LT'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.domreg.lt',
+            'registrar' => 'DOMREG.LT',
+        ];
+
         return $r;
     }
 }

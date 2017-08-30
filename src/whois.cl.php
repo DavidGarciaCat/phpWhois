@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__CL_HANDLER__')) {
     define('__CL_HANDLER__', 1);
 }
@@ -32,23 +32,24 @@ class cl_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'admin' => '(Administrative Contact)',
-            'tech' => 'Contacto Técnico (Technical Contact):',
+        $items = [
+            'admin'          => '(Administrative Contact)',
+            'tech'           => 'Contacto Técnico (Technical Contact):',
             'domain.nserver' => 'Servidores de nombre (Domain servers):',
-            'domain.changed' => '(Database last updated on):'
-        );
+            'domain.changed' => '(Database last updated on):',
+        ];
 
-        $trans = array(
+        $trans = [
             'organización:' => 'organization',
-            'nombre      :' => 'name');
+            'nombre      :' => 'name', ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'd-m-y', $trans);
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.cl',
-            'registrar' => 'NIC Chile'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.cl',
+            'registrar' => 'NIC Chile',
+        ];
+
         return $r;
     }
 }

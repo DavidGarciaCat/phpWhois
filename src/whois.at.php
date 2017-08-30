@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__AT_HANDLER__')) {
     define('__AT_HANDLER__', 1);
 }
@@ -32,25 +32,25 @@ class at_handler
 {
     public function parse($data_str, $query)
     {
-        $translate = array(
-            'fax-no' => 'fax',
-            'e-mail' => 'email',
-            'nic-hdl' => 'handle',
-            'person' => 'name',
-            'personname' => 'name',
+        $translate = [
+            'fax-no'         => 'fax',
+            'e-mail'         => 'email',
+            'nic-hdl'        => 'handle',
+            'person'         => 'name',
+            'personname'     => 'name',
             'street address' => 'address.street',
-            'city' => 'address.city',
-            'postal code' => 'address.pcode',
-            'country' => 'address.country'
-        );
+            'city'           => 'address.city',
+            'postal code'    => 'address.pcode',
+            'country'        => 'address.country',
+        ];
 
-        $contacts = array(
+        $contacts = [
             'registrant' => 'owner',
-            'admin-c' => 'admin',
-            'tech-c' => 'tech',
-            'billing-c' => 'billing',
-            'zone-c' => 'zone'
-        );
+            'admin-c'    => 'admin',
+            'tech-c'     => 'tech',
+            'billing-c'  => 'billing',
+            'zone-c'     => 'zone',
+        ];
 
         $reg = generic_parser_a($data_str['rawdata'], $translate, $contacts, 'domain', 'Ymd');
 
@@ -86,12 +86,13 @@ class at_handler
             }
         }
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = $reg;
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.at',
-            'registrar' => 'NIC-AT'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.at',
+            'registrar' => 'NIC-AT',
+        ];
+
         return $r;
     }
 }

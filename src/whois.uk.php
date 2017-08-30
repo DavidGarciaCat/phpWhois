@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__UK_HANDLER__')) {
     define('__UK_HANDLER__', 1);
 }
@@ -32,22 +32,22 @@ class uk_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
+        $items = [
             'owner.organization' => 'Registrant:',
-            'owner.address' => "Registrant's address:",
-            'owner.type' => 'Registrant type:',
-            'domain.created' => 'Registered on:',
-            'domain.changed' => 'Last updated:',
-            'domain.expires' => 'Renewal date:',
-            'domain.nserver' => 'Name servers:',
-            'domain.sponsor' => 'Registrar:',
-            'domain.status' => 'Registration status:',
-            'domain.dnssec' => 'DNSSEC:',
-            '' => 'WHOIS lookup made at',
-            'disclaimer' => '--',
-        );
+            'owner.address'      => "Registrant's address:",
+            'owner.type'         => 'Registrant type:',
+            'domain.created'     => 'Registered on:',
+            'domain.changed'     => 'Last updated:',
+            'domain.expires'     => 'Renewal date:',
+            'domain.nserver'     => 'Name servers:',
+            'domain.sponsor'     => 'Registrar:',
+            'domain.status'      => 'Registration status:',
+            'domain.dnssec'      => 'DNSSEC:',
+            ''                   => 'WHOIS lookup made at',
+            'disclaimer'         => '--',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = get_blocks($data_str['rawdata'], $items);
 
         if (isset($r['regrinfo']['owner'])) {
@@ -65,10 +65,11 @@ class uk_handler
             }
         }
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nominet.org.uk',
-            'registrar' => 'Nominet UK'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nominet.org.uk',
+            'registrar' => 'Nominet UK',
+        ];
+
         return $r;
     }
 }

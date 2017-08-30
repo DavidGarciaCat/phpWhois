@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__AU_HANDLER__')) {
     define('__AU_HANDLER__', 1);
 }
@@ -32,28 +32,29 @@ class au_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'Domain Name:' => 'domain.name',
-            'Last Modified:' => 'domain.changed',
-            'Registrar Name:' => 'domain.sponsor',
-            'Status:' => 'domain.status',
-            'Domain ROID:' => 'domain.handle',
-            'Registrant:' => 'owner.organization',
-            'Registrant Contact ID:' => 'owner.handle',
+        $items = [
+            'Domain Name:'              => 'domain.name',
+            'Last Modified:'            => 'domain.changed',
+            'Registrar Name:'           => 'domain.sponsor',
+            'Status:'                   => 'domain.status',
+            'Domain ROID:'              => 'domain.handle',
+            'Registrant:'               => 'owner.organization',
+            'Registrant Contact ID:'    => 'owner.handle',
             'Registrant Contact Email:' => 'owner.email',
-            'Registrant Contact Name:' => 'owner.name',
-            'Tech Contact Name:' => 'tech.name',
-            'Tech Contact Email:' => 'tech.email',
-            'Tech Contact ID:' => 'tech.handle',
-            'Name Server:' => 'domain.nserver.'
-        );
+            'Registrant Contact Name:'  => 'owner.name',
+            'Tech Contact Name:'        => 'tech.name',
+            'Tech Contact Email:'       => 'tech.email',
+            'Tech Contact ID:'          => 'tech.handle',
+            'Name Server:'              => 'domain.nserver.',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = generic_parser_b($data_str['rawdata'], $items);
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.aunic.net',
-            'registrar' => 'AU-NIC'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.aunic.net',
+            'registrar' => 'AU-NIC',
+        ];
+
         return $r;
     }
 }

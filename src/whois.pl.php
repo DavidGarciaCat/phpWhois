@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__PL_HANDLER__')) {
     define('__PL_HANDLER__', 1);
 }
@@ -32,20 +32,21 @@ class pl_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
+        $items = [
             'domain.created' => 'created:',
             'domain.changed' => 'last modified:',
             'domain.sponsor' => 'REGISTRAR:',
-            '#' => 'WHOIS displays data with a delay not exceeding 15 minutes in relation to the .pl Registry system'
-        );
+            '#'              => 'WHOIS displays data with a delay not exceeding 15 minutes in relation to the .pl Registry system',
+        ];
 
-        $r = array();
+        $r = [];
         $r['regrinfo'] = easy_parser($data_str['rawdata'], $items, 'ymd');
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.dns.pl/english/index.html',
-            'registrar' => 'NASK'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.dns.pl/english/index.html',
+            'registrar' => 'NASK',
+        ];
+
         return $r;
     }
 }

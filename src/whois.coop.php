@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  * @link http://phpwhois.pw
+ *
  * @copyright Copyright (C)1999,2005 easyDNS Technologies Inc. & Mark Jeftovic
  * @copyright Maintained by David Saez
  * @copyright Copyright (c) 2014 Dmitry Lukashin
  */
-
 if (!defined('__COOP_HANDLER__')) {
     define('__COOP_HANDLER__', 1);
 }
@@ -32,40 +32,40 @@ class coop_handler
 {
     public function parse($data_str, $query)
     {
-        $items = array(
-            'owner' => 'Contact Type:            registrant',
-            'admin' => 'Contact Type:            admin',
-            'tech' => 'Contact Type:            tech',
-            'billing' => 'Contact Type:            billing',
-            'domain.name' => 'Domain Name:',
-            'domain.handle' => 'Domain ID:',
-            'domain.expires' => 'Expiry Date:',
-            'domain.created' => 'Created:',
-            'domain.changed' => 'Last updated:',
-            'domain.status' => 'Domain Status:',
-            'domain.sponsor' => 'Sponsoring registrar:',
-            'domain.nserver.' => 'Host Name:'
-        );
+        $items = [
+            'owner'           => 'Contact Type:            registrant',
+            'admin'           => 'Contact Type:            admin',
+            'tech'            => 'Contact Type:            tech',
+            'billing'         => 'Contact Type:            billing',
+            'domain.name'     => 'Domain Name:',
+            'domain.handle'   => 'Domain ID:',
+            'domain.expires'  => 'Expiry Date:',
+            'domain.created'  => 'Created:',
+            'domain.changed'  => 'Last updated:',
+            'domain.status'   => 'Domain Status:',
+            'domain.sponsor'  => 'Sponsoring registrar:',
+            'domain.nserver.' => 'Host Name:',
+        ];
 
-        $translate = array(
-            'Contact ID:' => 'handle',
-            'Name:' => 'name',
-            'Organisation:' => 'organization',
-            'Street 1:' => 'address.street.0',
-            'Street 2:' => 'address.street.1',
-            'Street 3:' => 'address.street.2',
-            'City:' => 'address.city',
+        $translate = [
+            'Contact ID:'     => 'handle',
+            'Name:'           => 'name',
+            'Organisation:'   => 'organization',
+            'Street 1:'       => 'address.street.0',
+            'Street 2:'       => 'address.street.1',
+            'Street 3:'       => 'address.street.2',
+            'City:'           => 'address.city',
             'State/Province:' => 'address.state',
-            'Postal code:' => 'address.pcode',
-            'Country:' => 'address.country',
-            'Voice:' => 'phone',
-            'Fax:' => 'fax',
-            'Email:' => 'email'
-        );
+            'Postal code:'    => 'address.pcode',
+            'Country:'        => 'address.country',
+            'Voice:'          => 'phone',
+            'Fax:'            => 'fax',
+            'Email:'          => 'email',
+        ];
 
         $blocks = get_blocks($data_str['rawdata'], $items);
 
-        $r = array();
+        $r = [];
 
         if (isset($blocks['domain'])) {
             $r['regrinfo']['domain'] = format_dates($blocks['domain'], 'dmy');
@@ -92,10 +92,11 @@ class coop_handler
             $r['regrinfo']['registered'] = 'no';
         }
 
-        $r['regyinfo'] = array(
-            'referrer' => 'http://www.nic.coop',
-            'registrar' => '.coop registry'
-        );
+        $r['regyinfo'] = [
+            'referrer'  => 'http://www.nic.coop',
+            'registrar' => '.coop registry',
+        ];
+
         return $r;
     }
 }
